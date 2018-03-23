@@ -101,4 +101,4 @@ To build the repository with docker, do the following:
 tbd.
 
 # License
-dt (dev-toolbelt) is released under the MIT license. See [LICENSE.txt](LICENSE.TXT)
+dt (dev-toolbelt) is released under the MIT license. See [LICENSE.txt](LICENSE.txt)
