@@ -48,6 +48,8 @@ var urlRawCmd = &cobra.Command{
 
 		cmd.Help()
 	},
+	Example: `dt base64 urlRaw -e foo
+dt base64 urlRaw -d Zm9v`,
 }
 
 func init() {

@@ -48,6 +48,8 @@ var urlCmd = &cobra.Command{
 
 		cmd.Help()
 	},
+	Example: `dt base64 url -e foo
+dt base64 url -d Zm9v`,
 }
 
 func init() {

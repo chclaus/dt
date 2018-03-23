@@ -48,6 +48,8 @@ var stdRawCmd = &cobra.Command{
 
 		cmd.Help()
 	},
+	Example: `dt base64 stdRaw -e foo
+dt base64 stdRaw -d Zm9v`,
 }
 
 func init() {

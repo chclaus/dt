@@ -48,6 +48,8 @@ var stdCmd = &cobra.Command{
 
 		cmd.Help()
 	},
+	Example: `dt base64 std -e foo
+dt base64 std -d Zm9v`,
 }
 
 func init() {

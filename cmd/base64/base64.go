@@ -39,8 +39,6 @@ var base64Cmd = &cobra.Command{
 
 		return nil
 	},
-	Example: `dt base64 -e foo
-dt base64 -d Zm9v`,
 }
 
 func init() {
