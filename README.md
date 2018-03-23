@@ -72,4 +72,4 @@ TODO implement
 tbd.
 
 # License
-dt (dev-toolbelt) is released under the MIT license. See LICENSE.txt
+dt (dev-toolbelt) is released under the MIT license. See [LICENSE.txt](LICENSE.TXT)
