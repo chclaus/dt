@@ -3,7 +3,7 @@ The current project state is a very early draft...
 
 # Table of Contents
 
-- [Overview](#overview)
+- [Example](#example)
 - [Commands](#commands)
   * [URI](#uri-command)
   * [Base64](#base64-command)
@@ -14,11 +14,29 @@ The current project state is a very early draft...
 - [Contributing](#contributing)
 - [License](#license)
 
-# Overview
-The dev toolbelt is a fast and flexible tool to handle common use
-cases like encodings, string, jwt, ... operations.
+# Example
+        The dev toolbelt is a fast and flexible tool to handle common use
+        cases like encodings, string, jwt, ... operations.
 
-Use cases you generally use some online tools - BAH!
+        Use cases you generally use some online tools - BAH!
+
+        Usage:
+          dt [command]
+
+        Available Commands:
+          base64      Encodes or decodes a string to base64 representation
+          date        Basic date operations
+          hash        Hashes an arbitrary input with different hash algorithms
+          help        Help about any command
+          html        Escapes a html string and vice versa
+          jwt         Allows decoding of a jwt
+          uri         Encodes or decodes an URI
+          version     Prints the current version of the dt
+
+        Flags:
+          -h, --help   help for dt
+
+        Use "dt [command] --help" for more information about a command.
 
 # Commands
 
