@@ -23,17 +23,17 @@ package uri
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
-	"github.com/chclaus/dt/utils"
-	"log"
 	"github.com/chclaus/dt/cmd"
+	"github.com/chclaus/dt/utils"
+	"github.com/spf13/cobra"
+	"log"
 )
 
 // uriCmd represents the uri command
 var uriCmd = &cobra.Command{
 	Use:   "uri",
 	Short: "Encodes or decodes an URI",
-	Long: "Encodes or decodes an URI",
+	Long:  "Encodes or decodes an URI",
 	Run: func(cmd *cobra.Command, args []string) {
 		encode := cmd.Flag("encode").Value.String()
 		if encode != "" {

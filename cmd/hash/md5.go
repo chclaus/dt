@@ -23,10 +23,10 @@ package hash
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
+	"crypto/md5"
 	"errors"
 	"github.com/chclaus/dt/utils"
-	"crypto/md5"
+	"github.com/spf13/cobra"
 )
 
 // md5Cmd represents the md5 command

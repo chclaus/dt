@@ -23,9 +23,9 @@ package hash
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"errors"
 	"github.com/chclaus/dt/cmd"
+	"github.com/spf13/cobra"
 )
 
 // hashCmd represents the hash command

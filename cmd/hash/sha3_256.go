@@ -23,9 +23,9 @@ package hash
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"errors"
 	"github.com/chclaus/dt/utils"
+	"github.com/spf13/cobra"
 	"golang.org/x/crypto/sha3"
 )
 

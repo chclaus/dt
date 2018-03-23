@@ -21,35 +21,23 @@
 package base64
 
 import (
-	"fmt"
-
-	"github.com/spf13/cobra"
-	"github.com/chclaus/dt/utils"
-	"log"
+	"errors"
 	"github.com/chclaus/dt/cmd"
+	"github.com/spf13/cobra"
 )
 
 // base64Cmd represents the base64 command
 var base64Cmd = &cobra.Command{
-	Use:   "base64",
-	Short: "Encodes or decodes a string to base64 representation",
-	Long: "Encodes or decodes a string to base64 representation.",
-
-	Run: func(cmd *cobra.Command, args []string) {
-		encode := cmd.Flag("encode").Value.String()
-		if encode != "" {
-			fmt.Println(utils.EncodeBase64(encode))
+	Use:              "base64",
+	Short:            "Encodes or decodes a string to base64 representation",
+	Long:             "Encodes or decodes a string to base64 representation.",
+	TraverseChildren: true,
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 2 {
+			return errors.New("You have to specify the encoding algorithm")
 		}
 
-		decode := cmd.Flag("decode").Value.String()
-		if decode != "" {
-			result, err := utils.DecodeBase64(decode)
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			fmt.Println(result)
-		}
+		return nil
 	},
 	Example: `dt base64 -e foo
 dt base64 -d Zm9v`,
@@ -57,7 +45,4 @@ dt base64 -d Zm9v`,
 
 func init() {
 	cmd.RootCmd.AddCommand(base64Cmd)
-
-	base64Cmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
-	base64Cmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
 }

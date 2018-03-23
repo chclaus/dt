@@ -18,17 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package utils
+package base64
 
-import "encoding/base64"
+import (
+	"fmt"
 
-// EncodeBase64 encodes a plain string to it's base64 representation
-func EncodeBase64(enc *base64.Encoding, text string) string {
-	return enc.EncodeToString([]byte(text))
+	"encoding/base64"
+	"github.com/chclaus/dt/utils"
+	"github.com/spf13/cobra"
+)
+
+// stdCmd represents the std command
+var stdCmd = &cobra.Command{
+	Use:   "std",
+	Short: "Uses the standard base64 encoding, as defined in RFC 4648",
+	Long:  "Uses the standard base64 encoding, as defined in RFC 4648",
+	Run: func(cmd *cobra.Command, args []string) {
+		encode := cmd.Flag("encode").Value.String()
+		if encode != "" {
+			fmt.Println(utils.EncodeBase64(base64.StdEncoding, encode))
+		}
+
+		decode := cmd.Flag("decode").Value.String()
+		if decode != "" {
+			fmt.Println(utils.DecodeBase64(base64.StdEncoding, decode))
+		}
+	},
 }
 
-// DecodeBase64 decodes a base64 string to it's plain text representation
-func DecodeBase64(enc *base64.Encoding, text string) string {
-	result, _ := enc.DecodeString(text)
-	return string(result)
+func init() {
+	base64Cmd.AddCommand(stdCmd)
+
+	stdCmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
+	stdCmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
 }

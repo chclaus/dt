@@ -23,10 +23,10 @@ package hash
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
+	"crypto/sha256"
 	"errors"
 	"github.com/chclaus/dt/utils"
-	"crypto/sha256"
+	"github.com/spf13/cobra"
 )
 
 // sha256Cmd represents the sha256 command
