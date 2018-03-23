@@ -24,39 +24,28 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/chclaus/dt/utils"
-	"log"
+	"errors"
 )
 
-// uriCmd represents the uri command
-var uriCmd = &cobra.Command{
-	Use:   "uri",
-	Short: "Encodes or decodes an URI",
-	Long: "Encodes or decodes an URI",
-	Run: func(cmd *cobra.Command, args []string) {
-		encode := cmd.Flag("encode").Value.String()
-		if encode != "" {
-			fmt.Println(utils.EncodeUri(encode))
+// hashCmd represents the hash command
+var hashCmd = &cobra.Command{
+	Use:   "hash",
+	Short: "A command that allows hashing an arbitrary input with different hash algorithms",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 2 {
+			return errors.New("You have to specify the algorithm and the text which should be hashed.")
 		}
 
-		decode := cmd.Flag("decode").Value.String()
-		if decode != "" {
-			result, err := utils.DecodeUri(decode)
-
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			fmt.Println(result)
+		return nil
+	},
+	Long: "A command that allows hashing an arbitrary input with different hash algorithms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		for _, s := range args {
+			fmt.Println(s)
 		}
 	},
-	Example: `dt uri -e http://www.github.com'
-dt uri -d http%3A%2F%2Fwww.github.com`,
 }
 
 func init() {
-	rootCmd.AddCommand(uriCmd)
-
-	uriCmd.Flags().StringP("encode", "e", "", "encodes an URI to a safe representation")
-	uriCmd.Flags().StringP("decode", "d", "", "decodes an already encoded URI")
+	rootCmd.AddCommand(hashCmd)
 }

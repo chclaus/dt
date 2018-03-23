@@ -32,13 +32,12 @@ import (
 var base64Cmd = &cobra.Command{
 	Use:   "base64",
 	Short: "Encodes or decodes a string to base64 representation",
-	Long: `Encodes or decodes a string to base64 representation.
+	Long: "Encodes or decodes a string to base64 representation.",
 
-For example: The base64 encoded representation of the string 'foo' is 'Zm9vCg=='`,
 	Run: func(cmd *cobra.Command, args []string) {
 		encode := cmd.Flag("encode").Value.String()
 		if encode != "" {
-			fmt.Printf("Encoded URI '%s'\n", utils.EncodeBase64(encode))
+			fmt.Println(utils.EncodeBase64(encode))
 		}
 
 		decode := cmd.Flag("decode").Value.String()
@@ -48,9 +47,11 @@ For example: The base64 encoded representation of the string 'foo' is 'Zm9vCg=='
 				log.Fatal(err)
 			}
 
-			fmt.Printf("Decoded URI: '%s'\n", result)
+			fmt.Println(result)
 		}
 	},
+	Example: `dt base64 -e foo
+dt base64 -d Zm9v`,
 }
 
 func init() {

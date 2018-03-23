@@ -18,45 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package utils
 
 import (
 	"fmt"
-
-	"github.com/spf13/cobra"
-	"github.com/chclaus/dt/utils"
-	"log"
+	"hash"
 )
 
-// uriCmd represents the uri command
-var uriCmd = &cobra.Command{
-	Use:   "uri",
-	Short: "Encodes or decodes an URI",
-	Long: "Encodes or decodes an URI",
-	Run: func(cmd *cobra.Command, args []string) {
-		encode := cmd.Flag("encode").Value.String()
-		if encode != "" {
-			fmt.Println(utils.EncodeUri(encode))
-		}
+func Hash(hash hash.Hash, text string) string {
+	hash.Write([]byte(text))
 
-		decode := cmd.Flag("decode").Value.String()
-		if decode != "" {
-			result, err := utils.DecodeUri(decode)
-
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			fmt.Println(result)
-		}
-	},
-	Example: `dt uri -e http://www.github.com'
-dt uri -d http%3A%2F%2Fwww.github.com`,
-}
-
-func init() {
-	rootCmd.AddCommand(uriCmd)
-
-	uriCmd.Flags().StringP("encode", "e", "", "encodes an URI to a safe representation")
-	uriCmd.Flags().StringP("decode", "d", "", "decodes an already encoded URI")
+	return fmt.Sprintf("%x", hash.Sum(nil))
 }

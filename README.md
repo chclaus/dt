@@ -25,6 +25,15 @@ Use cases you generally use some online tools - BAH!
 - Encodes a string to it's base64 representation
 - Decodes a base64 string to it's plain representation
 
+## Hash command
+Returns the hash representation of an input in different hash formats:
+- md5
+- sha1
+- sha256
+- sha3_256
+- sha3_512
+- sha512
+
 ## JWT command
 Decode, Encode and validate JWTs
 
