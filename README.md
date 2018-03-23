@@ -1,3 +1,6 @@
+# Intro
+The current project state is a very early draft...
+
 # Table of Contents
 
 - [Overview](#overview)
@@ -13,10 +16,37 @@ cases like encodings, string, jwt, ... operations.
 Use cases you generally use some online tools - BAH!
 
 # Commands
-tbd.
 
 ## URI command
 Encode or decode an URI
+
+## Base64 command
+Encode or decode strings to base64
+
+TODO implement
+
+## JWT command
+Decode, Encode and validate JWTs
+
+TODO implement
+
+## Regex command
+TODO
+
+## HTML command
+Encode and decode HTML
+
+TODO implement
+
+## Date command
+Date conversions like current time millis to ISO 8601, etc.
+
+TODO implement
+
+## Password command
+Generate passwords and password hashes
+
+TODO implement
 
 # Contributing
 tbd.
