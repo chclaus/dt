@@ -18,19 +18,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main
+package html
 
 import (
 	"github.com/chclaus/dt/cmd"
-	_ "github.com/chclaus/dt/cmd/base64" // import for init functions
-	_ "github.com/chclaus/dt/cmd/date"   // import for init functions
-	_ "github.com/chclaus/dt/cmd/hash"   // import for init functions
-	_ "github.com/chclaus/dt/cmd/jwt"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/uri"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/html"   // import for init functions
+	"github.com/spf13/cobra"
+	"fmt"
+	"html"
+	"io/ioutil"
+	"log"
 )
 
-func main() {
-	cmd.Execute()
+// htmlCmd represents the html command
+var htmlCmd = &cobra.Command{
+	Use:   "html",
+	Short: "Escapes a html string and vice versa",
+	Long:  "Escapes a html string and vice versa.",
+	Run: func(cmd *cobra.Command, args []string) {
+		encode := cmd.Flag("escape").Value.String()
+		if encode != "" {
+			fmt.Println(html.EscapeString(encode))
+			return
+		}
 
+		encodeFile := cmd.Flag("escapeFile").Value.String()
+		if encodeFile != "" {
+			bytes, err := ioutil.ReadFile(encodeFile)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Println(html.EscapeString(string(bytes)))
+			return
+		}
+
+		decode := cmd.Flag("unescape").Value.String()
+		if decode != "" {
+			fmt.Println(html.UnescapeString(decode))
+			return
+		}
+
+		cmd.Help()
+	},
+	Example: ``,
+}
+
+func init() {
+	cmd.RootCmd.AddCommand(htmlCmd)
+
+	htmlCmd.Flags().StringP("escape", "e", "", "transforms a string to an escaped html sequence")
+	htmlCmd.Flags().StringP("escapeFile", "f", "", "reads a file and prints an escaped html sequence")
+	htmlCmd.Flags().StringP("unescape", "d", "", "unescapes an escaped html sequence to it's raw representation")
 }

@@ -57,10 +57,10 @@ Date conversions:
 TODO
 
 ## HTML command
-Encode and decode HTML
-
-TODO implement
-
+Escapes and unescapes HTML
+- transforms a string to an escaped html sequence
+- reads a file and prints an escaped html sequence
+- unescapes an escaped html sequence to it's raw representation
 
 
 ## Password command
