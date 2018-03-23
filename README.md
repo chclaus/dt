@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/chclaus/dt.svg?branch=master)](https://travis-ci.org/chclaus/dt)
+
 # Intro
 The current project state is a very early draft...
 
