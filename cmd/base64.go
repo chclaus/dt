@@ -28,23 +28,22 @@ import (
 	"log"
 )
 
-// uriCmd represents the uri command
-var uriCmd = &cobra.Command{
-	Use:   "uri",
-	Short: "Encodes or decodes an URI",
-	Long: `Encodes or decodes an URI.
+// base64Cmd represents the base64 command
+var base64Cmd = &cobra.Command{
+	Use:   "base64",
+	Short: "Encodes or decodes a string to base64 representation",
+	Long: `Encodes or decodes a string to base64 representation.
 
-For example: The encoded URI 'http://www.github.com' is 'http%3A%2F%2Fwww.github.com'.`,
+For example: The base64 encoded representation of the string 'foo' is 'Zm9vCg=='`,
 	Run: func(cmd *cobra.Command, args []string) {
 		encode := cmd.Flag("encode").Value.String()
 		if encode != "" {
-			fmt.Printf("Encoded URI '%s'\n", utils.EncodeUri(encode))
+			fmt.Printf("Encoded URI '%s'\n", utils.EncodeBase64(encode))
 		}
 
 		decode := cmd.Flag("decode").Value.String()
 		if decode != "" {
-			result, err := utils.DecodeUri(decode)
-
+			result, err := utils.DecodeBase64(decode)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -55,8 +54,8 @@ For example: The encoded URI 'http://www.github.com' is 'http%3A%2F%2Fwww.github
 }
 
 func init() {
-	rootCmd.AddCommand(uriCmd)
+	rootCmd.AddCommand(base64Cmd)
 
-	uriCmd.Flags().StringP("encode", "e", "", "encodes an URI to a safe representation")
-	uriCmd.Flags().StringP("decode", "d", "", "decodes an already encoded URI")
+	base64Cmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
+	base64Cmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
 }

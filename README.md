@@ -18,12 +18,12 @@ Use cases you generally use some online tools - BAH!
 # Commands
 
 ## URI command
-Encode or decode an URI
+- Encodes an URI to a safe representation
+- Decodes an already encoded URI
 
 ## Base64 command
-Encode or decode strings to base64
-
-TODO implement
+- Encodes a string to it's base64 representation
+- Decodes a base64 string to it's plain representation
 
 ## JWT command
 Decode, Encode and validate JWTs
