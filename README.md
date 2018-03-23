@@ -6,6 +6,11 @@ The current project state is a very early draft...
 - [Overview](#overview)
 - [Commands](#commands)
   * [URI](#uri-command)
+  * [Base64](#base64-command)
+  * [Hash](#hash-command)
+  * [JWT](#jwt-command)
+  * [Date](#date-command)
+  * [HTML](#html-command)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -67,6 +72,30 @@ Escapes and unescapes HTML
 Generate passwords and password hashes
 
 TODO implement
+
+# Get dt
+## Install
+If you've go installed and your `$GOPATH` is set, you can easily install
+dt with:
+
+        go get github.com/chclaus/dt
+
+## Build
+To build the project you can clone the repository with...
+
+        git clone git@github.com:chclaus/dt
+
+... and build and install the binary with
+
+        cd dt && go install
+
+## Build with Docker
+To build the repository with docker, do the following:
+
+        git clone git@github.com:chclaus/dt
+        cd dt
+        docker build -t dt .
+        docker run --rm dt version
 
 # Contributing
 tbd.
