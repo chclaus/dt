@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package uri
 
 import (
 	"fmt"
@@ -26,6 +26,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/chclaus/dt/utils"
 	"log"
+	"github.com/chclaus/dt/cmd"
 )
 
 // uriCmd represents the uri command
@@ -55,7 +56,7 @@ dt uri -d http%3A%2F%2Fwww.github.com`,
 }
 
 func init() {
-	rootCmd.AddCommand(uriCmd)
+	cmd.RootCmd.AddCommand(uriCmd)
 
 	uriCmd.Flags().StringP("encode", "e", "", "encodes an URI to a safe representation")
 	uriCmd.Flags().StringP("decode", "d", "", "decodes an already encoded URI")

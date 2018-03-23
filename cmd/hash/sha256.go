@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package hash
 
 import (
 	"fmt"
@@ -26,13 +26,13 @@ import (
 	"github.com/spf13/cobra"
 	"errors"
 	"github.com/chclaus/dt/utils"
-	"crypto/md5"
+	"crypto/sha256"
 )
 
-// md5Cmd represents the md5 command
-var md5Cmd = &cobra.Command{
-	Use:   "md5",
-	Short: "Returns the md5 hash representation of the input",
+// sha256Cmd represents the sha256 command
+var sha256Cmd = &cobra.Command{
+	Use:   "sha256",
+	Short: "Returns the sha256 hash representation of the input",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			return errors.New("You have to specify the text that should be hashed.")
@@ -40,12 +40,12 @@ var md5Cmd = &cobra.Command{
 
 		return nil
 	},
-	Long: "Returns the md5 hash representation of the input.",
+	Long: "Returns the sha256 hash representation of the input.",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(utils.Hash(md5.New(), args[0]))
+		fmt.Println(utils.Hash(sha256.New(), args[0]))
 	},
 }
 
 func init() {
-	hashCmd.AddCommand(md5Cmd)
+	hashCmd.AddCommand(sha256Cmd)
 }

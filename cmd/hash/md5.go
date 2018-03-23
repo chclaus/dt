@@ -18,45 +18,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package hash
 
 import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"errors"
 	"github.com/chclaus/dt/utils"
-	"log"
+	"crypto/md5"
 )
 
-// base64Cmd represents the base64 command
-var base64Cmd = &cobra.Command{
-	Use:   "base64",
-	Short: "Encodes or decodes a string to base64 representation",
-	Long: "Encodes or decodes a string to base64 representation.",
-
-	Run: func(cmd *cobra.Command, args []string) {
-		encode := cmd.Flag("encode").Value.String()
-		if encode != "" {
-			fmt.Println(utils.EncodeBase64(encode))
+// md5Cmd represents the md5 command
+var md5Cmd = &cobra.Command{
+	Use:   "md5",
+	Short: "Returns the md5 hash representation of the input",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return errors.New("You have to specify the text that should be hashed.")
 		}
 
-		decode := cmd.Flag("decode").Value.String()
-		if decode != "" {
-			result, err := utils.DecodeBase64(decode)
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			fmt.Println(result)
-		}
+		return nil
 	},
-	Example: `dt base64 -e foo
-dt base64 -d Zm9v`,
+	Long: "Returns the md5 hash representation of the input.",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(utils.Hash(md5.New(), args[0]))
+	},
 }
 
 func init() {
-	rootCmd.AddCommand(base64Cmd)
-
-	base64Cmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
-	base64Cmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
+	hashCmd.AddCommand(md5Cmd)
 }

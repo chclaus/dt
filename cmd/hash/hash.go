@@ -18,13 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package hash
 
 import (
 	"fmt"
 
 	"github.com/spf13/cobra"
 	"errors"
+	"github.com/chclaus/dt/cmd"
 )
 
 // hashCmd represents the hash command
@@ -47,5 +48,5 @@ var hashCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(hashCmd)
+	cmd.RootCmd.AddCommand(hashCmd)
 }

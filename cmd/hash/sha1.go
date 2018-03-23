@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package hash
 
 import (
 	"fmt"
@@ -26,13 +26,13 @@ import (
 	"github.com/spf13/cobra"
 	"errors"
 	"github.com/chclaus/dt/utils"
-	"golang.org/x/crypto/sha3"
+	"crypto/sha1"
 )
 
-// sha3512Cmd represents the sha3512 command
-var sha3512Cmd = &cobra.Command{
-	Use:   "sha3_512",
-	Short: "Returns the sha3 512 hash representation of the input",
+// sha1Cmd represents the sha1 command
+var sha1Cmd = &cobra.Command{
+	Use:   "sha1",
+	Short: "Returns the sha1 hash representation of the input",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			return errors.New("You have to specify the text that should be hashed.")
@@ -40,12 +40,12 @@ var sha3512Cmd = &cobra.Command{
 
 		return nil
 	},
-	Long: "Returns the sha3 512 hash representation of the input.",
+	Long: "Returns the sha1 hash representation of the input.",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(utils.Hash(sha3.New512(), args[0]))
+		fmt.Println(utils.Hash(sha1.New(), args[0]))
 	},
 }
 
 func init() {
-	hashCmd.AddCommand(sha3512Cmd)
+	hashCmd.AddCommand(sha1Cmd)
 }

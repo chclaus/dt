@@ -18,34 +18,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package cmd
+package base64
 
 import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"errors"
 	"github.com/chclaus/dt/utils"
-	"golang.org/x/crypto/sha3"
+	"log"
+	"github.com/chclaus/dt/cmd"
 )
 
-// sha3256Cmd represents the sha3256 command
-var sha3256Cmd = &cobra.Command{
-	Use:   "sha3_256",
-	Short: "Returns the sha3 256 hash representation of the input",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			return errors.New("You have to specify the text that should be hashed.")
+// base64Cmd represents the base64 command
+var base64Cmd = &cobra.Command{
+	Use:   "base64",
+	Short: "Encodes or decodes a string to base64 representation",
+	Long: "Encodes or decodes a string to base64 representation.",
+
+	Run: func(cmd *cobra.Command, args []string) {
+		encode := cmd.Flag("encode").Value.String()
+		if encode != "" {
+			fmt.Println(utils.EncodeBase64(encode))
 		}
 
-		return nil
+		decode := cmd.Flag("decode").Value.String()
+		if decode != "" {
+			result, err := utils.DecodeBase64(decode)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Println(result)
+		}
 	},
-	Long: "Returns the sha3 256 hash representation of the input.",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(utils.Hash(sha3.New256(), args[0]))
-	},
+	Example: `dt base64 -e foo
+dt base64 -d Zm9v`,
 }
 
 func init() {
-	hashCmd.AddCommand(sha3256Cmd)
+	cmd.RootCmd.AddCommand(base64Cmd)
+
+	base64Cmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
+	base64Cmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
 }

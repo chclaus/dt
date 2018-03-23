@@ -20,7 +20,12 @@
 
 package main
 
-import "github.com/chclaus/dt/cmd"
+import (
+	"github.com/chclaus/dt/cmd"
+	_ "github.com/chclaus/dt/cmd/base64" // import for init functions
+	_ "github.com/chclaus/dt/cmd/hash" // import for init functions
+	_ "github.com/chclaus/dt/cmd/uri" // import for init functions
+)
 
 func main() {
 	cmd.Execute()
