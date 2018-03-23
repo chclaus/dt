@@ -41,9 +41,11 @@ Returns the hash representation of an input in different hash formats:
 - sha512
 
 ## JWT command
-Decode, Encode and validate JWTs
+Decodes a jwt and pretty prints the resulting json
 
-TODO implement
+Further TODOs:
+- Signature validation
+- JWT creation
 
 ## Regex command
 TODO
