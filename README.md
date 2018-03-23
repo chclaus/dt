@@ -49,9 +49,9 @@ Further TODOs:
 
 ## Date command
 Date conversions:
-- time millis to RFC3339
-- time nanos to RFC3339
-- RFC3339 to time millis
+- time millis to RFC 3339
+- time nanos to RFC 3339
+- RFC 3339 to time millis
 
 ## Regex command
 TODO
