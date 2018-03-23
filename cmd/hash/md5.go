@@ -33,6 +33,7 @@ import (
 var md5Cmd = &cobra.Command{
 	Use:   "md5",
 	Short: "Returns the md5 hash representation of the input",
+	Long:  "Returns the md5 hash representation of the input.",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			return errors.New("You have to specify the text that should be hashed.")
@@ -40,7 +41,6 @@ var md5Cmd = &cobra.Command{
 
 		return nil
 	},
-	Long: "Returns the md5 hash representation of the input.",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(utils.Hash(md5.New(), args[0]))
 	},

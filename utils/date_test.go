@@ -18,41 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package base64
+package utils
 
-import (
-	"fmt"
+import "testing"
 
-	"encoding/base64"
-	"github.com/chclaus/dt/utils"
-	"github.com/spf13/cobra"
-)
-
-// stdCmd represents the std command
-var stdCmd = &cobra.Command{
-	Use:   "std",
-	Short: "Uses the standard base64 encoding, as defined in RFC 4648",
-	Long:  "Uses the standard base64 encoding, as defined in RFC 4648",
-	Run: func(cmd *cobra.Command, args []string) {
-		encode := cmd.Flag("encode").Value.String()
-		if encode != "" {
-			fmt.Println(utils.EncodeBase64(base64.StdEncoding, encode))
-			return
-		}
-
-		decode := cmd.Flag("decode").Value.String()
-		if decode != "" {
-			fmt.Println(utils.DecodeBase64(base64.StdEncoding, decode))
-			return
-		}
-
-		cmd.Help()
-	},
+func TestParseMillisUnixTimestamp(t *testing.T) {
+	time, err := ParseTimestamp("1521820515")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if time.Unix() != 1521820515 {
+		t.Fatal("Error while parsing timestamp")
+	}
 }
 
-func init() {
-	base64Cmd.AddCommand(stdCmd)
+func TestParseNanosUnixTimestamp(t *testing.T) {
+	time, err := ParseTimestamp("1521820515000")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if time.Unix() != 1521820515 {
+		t.Fatal("Error while parsing timestamp")
+	}
+}
 
-	stdCmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
-	stdCmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
+func TestParseIsoDate(t *testing.T) {
+	time, err := ParseTimestamp("2018-03-23T16:55:15+01:00")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if time.Unix() != 1521820515 {
+		t.Fatal("Error while parsing timestamp")
+	}
 }

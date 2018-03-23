@@ -37,12 +37,16 @@ var urlRawCmd = &cobra.Command{
 		encode := cmd.Flag("encode").Value.String()
 		if encode != "" {
 			fmt.Println(utils.EncodeBase64(base64.RawURLEncoding, encode))
+			return
 		}
 
 		decode := cmd.Flag("decode").Value.String()
 		if decode != "" {
 			fmt.Println(utils.DecodeBase64(base64.RawURLEncoding, decode))
+			return
 		}
+
+		cmd.Help()
 	},
 }
 

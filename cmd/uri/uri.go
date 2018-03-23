@@ -38,6 +38,7 @@ var uriCmd = &cobra.Command{
 		encode := cmd.Flag("encode").Value.String()
 		if encode != "" {
 			fmt.Println(utils.EncodeUri(encode))
+			return
 		}
 
 		decode := cmd.Flag("decode").Value.String()
@@ -49,7 +50,10 @@ var uriCmd = &cobra.Command{
 			}
 
 			fmt.Println(result)
+			return
 		}
+
+		cmd.Help()
 	},
 	Example: `dt uri -e http://www.github.com'
 dt uri -d http%3A%2F%2Fwww.github.com`,

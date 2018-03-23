@@ -18,41 +18,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package base64
+package utils
 
 import (
-	"fmt"
-
-	"encoding/base64"
-	"github.com/chclaus/dt/utils"
-	"github.com/spf13/cobra"
+	"errors"
+	"strconv"
+	"time"
+	"unicode"
 )
 
-// stdCmd represents the std command
-var stdCmd = &cobra.Command{
-	Use:   "std",
-	Short: "Uses the standard base64 encoding, as defined in RFC 4648",
-	Long:  "Uses the standard base64 encoding, as defined in RFC 4648",
-	Run: func(cmd *cobra.Command, args []string) {
-		encode := cmd.Flag("encode").Value.String()
-		if encode != "" {
-			fmt.Println(utils.EncodeBase64(base64.StdEncoding, encode))
-			return
+func isDigitOnly(date string) bool {
+	for _, c := range date {
+		if !unicode.IsDigit(c) {
+			return false
 		}
+	}
 
-		decode := cmd.Flag("decode").Value.String()
-		if decode != "" {
-			fmt.Println(utils.DecodeBase64(base64.StdEncoding, decode))
-			return
-		}
-
-		cmd.Help()
-	},
+	return true
 }
 
-func init() {
-	base64Cmd.AddCommand(stdCmd)
+func ParseTimestamp(date string) (time.Time, error) {
+	if isDigitOnly(date) {
+		intDate, err := strconv.ParseInt(date, 10, 64)
+		if err != nil {
+			return time.Time{}, err
+		}
 
-	stdCmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
-	stdCmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
+		if len(date) == 10 {
+			return time.Unix(intDate, 0), nil
+		}
+
+		if len(date) == 13 {
+			nanos := intDate % 1000
+			millis := intDate / 1000
+
+			return time.Unix(millis, nanos), nil
+		}
+
+		return time.Time{}, errors.New("Could not parse time :(")
+	}
+
+	parsedTime, err := time.Parse(time.RFC3339, date)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return parsedTime, nil
 }

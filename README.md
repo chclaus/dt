@@ -41,11 +41,17 @@ Returns the hash representation of an input in different hash formats:
 - sha512
 
 ## JWT command
-Decodes a jwt and pretty prints the resulting json
+Decodes a jwt and pretty prints the resulting json.
 
 Further TODOs:
 - Signature validation
 - JWT creation
+
+## Date command
+Date conversions:
+- time millis to RFC3339
+- time nanos to RFC3339
+- RFC3339 to time millis
 
 ## Regex command
 TODO
@@ -55,10 +61,7 @@ Encode and decode HTML
 
 TODO implement
 
-## Date command
-Date conversions like current time millis to ISO 8601, etc.
 
-TODO implement
 
 ## Password command
 Generate passwords and password hashes

@@ -18,41 +18,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package base64
+package date
 
 import (
+	"errors"
 	"fmt"
-
-	"encoding/base64"
+	"github.com/chclaus/dt/cmd"
 	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
+	"log"
 )
 
-// stdCmd represents the std command
-var stdCmd = &cobra.Command{
-	Use:   "std",
-	Short: "Uses the standard base64 encoding, as defined in RFC 4648",
-	Long:  "Uses the standard base64 encoding, as defined in RFC 4648",
-	Run: func(cmd *cobra.Command, args []string) {
-		encode := cmd.Flag("encode").Value.String()
-		if encode != "" {
-			fmt.Println(utils.EncodeBase64(base64.StdEncoding, encode))
-			return
+// dateCmd represents the date command
+var dateCmd = &cobra.Command{
+	Use:   "date [the date]",
+	Short: "Basic date operations",
+	Long:  "Basic date operations.",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return errors.New("You have to specify a date")
 		}
 
-		decode := cmd.Flag("decode").Value.String()
-		if decode != "" {
-			fmt.Println(utils.DecodeBase64(base64.StdEncoding, decode))
-			return
-		}
-
-		cmd.Help()
+		return nil
 	},
+	Run: func(cmd *cobra.Command, args []string) {
+		dateInput := args[0]
+
+		time, e := utils.ParseTimestamp(dateInput)
+		if e != nil {
+			log.Fatal(e)
+		}
+
+		fmt.Printf("Unix timestamp (millis): %d\n", time.Unix())
+		fmt.Printf("Unix timestamp (nanos): %s\n", time.String())
+		fmt.Printf("Day: %d\n", time.Day())
+		fmt.Printf("Day of week: %d\n", time.Weekday())
+		fmt.Printf("Day of year: %d\n", time.YearDay())
+		fmt.Printf("Month: %d\n", time.Month())
+		fmt.Printf("Year: %d\n", time.Year())
+	},
+	Example: `dt date 2018-03-23T16:55:15+02:00
+dt date 1521816915
+dt date 1521816915000`,
 }
 
 func init() {
-	base64Cmd.AddCommand(stdCmd)
-
-	stdCmd.Flags().StringP("encode", "e", "", "encodes a string to it's base64 representation")
-	stdCmd.Flags().StringP("decode", "d", "", "decodes a base64 string to it's plain representation")
+	cmd.RootCmd.AddCommand(dateCmd)
 }
