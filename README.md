@@ -13,6 +13,7 @@ The current project state is a very early draft...
   * [JWT](#jwt-command)
   * [Date](#date-command)
   * [HTML](#html-command)
+  * [Server](#server)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -32,6 +33,7 @@ The current project state is a very early draft...
           help        Help about any command
           html        Escapes a html string and vice versa
           jwt         Allows decoding of a jwt
+          server      Starts a simple web server to serve static content
           uri         Encodes or decodes an URI
           version     Prints the current version of the dt
 
@@ -92,6 +94,11 @@ Escapes and unescapes HTML
 Generate passwords and password hashes
 
 TODO implement
+
+## Server
+Starts a simple web server to serve static content. You can specify
+hostname and port and must set a folder to serve.
+
 
 # Get dt
 ## Install

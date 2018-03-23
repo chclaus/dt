@@ -18,20 +18,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main
+package server
 
 import (
 	"github.com/chclaus/dt/cmd"
-	_ "github.com/chclaus/dt/cmd/base64"  // import for init functions
-	_ "github.com/chclaus/dt/cmd/date"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/hash"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/jwt"     // import for init functions
-	_ "github.com/chclaus/dt/cmd/uri"     // import for init functions
-	_ "github.com/chclaus/dt/cmd/html"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/version" // import for init functions
-	_ "github.com/chclaus/dt/cmd/server"  // import for init functions
+	"github.com/spf13/cobra"
+	"net/http"
+	"errors"
+	"fmt"
 )
 
-func main() {
-	cmd.Execute()
+// serverCmd represents the server command
+var serverCmd = &cobra.Command{
+	Use:   "server",
+	Short: "Starts a simple web server to serve static content",
+	Long:  "Starts a simple web server to serve static content",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return errors.New("You have to specify a folder with web content")
+		}
+
+		return nil
+	},
+	Run: func(cmd *cobra.Command, args []string) {
+		fs := http.FileServer(http.Dir(args[0]))
+		http.Handle("/", fs)
+
+		hostname := cmd.Flag("address").Value.String()
+		port := cmd.Flag("port").Value.String()
+		addr := fmt.Sprintf("%s:%s", hostname, port)
+
+		fmt.Printf("Serving %s on %s\n", args[0], addr)
+
+		http.ListenAndServe(addr, nil)
+	},
+	Example: ``,
+}
+
+func init() {
+	cmd.RootCmd.AddCommand(serverCmd)
+
+	serverCmd.Flags().StringP("address", "a", "0.0.0.0", "the hostname or ip address")
+	serverCmd.Flags().StringP("port", "p", "3000", "the listening port")
 }
