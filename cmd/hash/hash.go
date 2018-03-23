@@ -21,8 +21,6 @@
 package hash
 
 import (
-	"fmt"
-
 	"errors"
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
@@ -31,7 +29,7 @@ import (
 // hashCmd represents the hash command
 var hashCmd = &cobra.Command{
 	Use:   "hash",
-	Short: "A command that allows hashing an arbitrary input with different hash algorithms",
+	Short: "Hashes an arbitrary input with different hash algorithms",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 2 {
 			return errors.New("You have to specify the algorithm and the text which should be hashed.")
@@ -39,12 +37,7 @@ var hashCmd = &cobra.Command{
 
 		return nil
 	},
-	Long: "A command that allows hashing an arbitrary input with different hash algorithms.",
-	Run: func(cmd *cobra.Command, args []string) {
-		for _, s := range args {
-			fmt.Println(s)
-		}
-	},
+	Long: "Hashes an arbitrary input with different hash algorithms.",
 }
 
 func init() {

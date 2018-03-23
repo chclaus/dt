@@ -25,6 +25,12 @@ Use cases you generally use some online tools - BAH!
 - Encodes a string to it's base64 representation
 - Decodes a base64 string to it's plain representation
 
+The base64 command can be used with different encodings:
+- Standard, follows RFC 4648
+- Standard Raw, follows RFC 4648 but with without padding
+- URL, follows the alternative RFC 4648
+- URL Raw, follows the alternative RFC 4648 but with without padding
+
 ## Hash command
 Returns the hash representation of an input in different hash formats:
 - md5
