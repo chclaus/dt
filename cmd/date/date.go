@@ -50,7 +50,7 @@ var dateCmd = &cobra.Command{
 		}
 
 		fmt.Printf("Unix timestamp (millis): %d\n", time.Unix())
-		fmt.Printf("Unix timestamp (nanos): %s\n", time.String())
+		fmt.Printf("Datetime: %s\n", time.String())
 		fmt.Printf("Day: %d\n", time.Day())
 		fmt.Printf("Day of week: %d\n", time.Weekday())
 		fmt.Printf("Day of year: %d\n", time.YearDay())
