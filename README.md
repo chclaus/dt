@@ -1,7 +1,10 @@
 [![Build Status](https://travis-ci.org/chclaus/dt.svg?branch=master)](https://travis-ci.org/chclaus/dt)
+[![Go Report](https://goreportcard.com/badge/github.com/chclaus/dt)](https://goreportcard.com/report/github.com/chclaus/dt)
 
 # Intro
-The current project state is a very early draft...
+The dev toolbelt is a fast and flexible tool to handle common use
+cases of your daily work. Use cases you generally use some online
+tools.
 
 # Table of Contents
 
@@ -18,11 +21,6 @@ The current project state is a very early draft...
 - [License](#license)
 
 # Example
-        The dev toolbelt is a fast and flexible tool to handle common use
-        cases like encodings, string, jwt, ... operations.
-
-        Use cases you generally use some online tools - BAH!
-
         Usage:
           dt [command]
 

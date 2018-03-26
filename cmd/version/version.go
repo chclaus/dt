@@ -21,9 +21,9 @@
 package version
 
 import (
+	"fmt"
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
-	"fmt"
 )
 
 // versionCmd represents the version command

@@ -21,11 +21,11 @@
 package server
 
 import (
+	"errors"
+	"fmt"
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
 	"net/http"
-	"errors"
-	"fmt"
 )
 
 // serverCmd represents the server command

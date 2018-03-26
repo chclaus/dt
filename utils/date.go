@@ -37,6 +37,10 @@ func isDigitOnly(date string) bool {
 	return true
 }
 
+// ParseTimestamp tries to parses a string into a time.Time format. The following cascade is used:
+// 1. It tries to parse the string as current time millis.
+// 2. It tries to parse the string as current time nanos.
+// 3. It tries to parse the string as RFC 3339 time.
 func ParseTimestamp(date string) (time.Time, error) {
 	if isDigitOnly(date) {
 		intDate, err := strconv.ParseInt(date, 10, 64)

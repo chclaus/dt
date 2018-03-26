@@ -21,9 +21,9 @@
 package html
 
 import (
+	"fmt"
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
-	"fmt"
 	"html"
 	"io/ioutil"
 	"log"
