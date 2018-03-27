@@ -25,7 +25,7 @@ tools.
           dt [command]
 
         Available Commands:
-          base64      Encodes or decodes a string to base64 representation
+          base64      Encodes or decodes a string to it's base64 representation
           date        Basic date operations
           hash        Hashes an arbitrary input with different hash algorithms
           help        Help about any command

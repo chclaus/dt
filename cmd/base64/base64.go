@@ -29,8 +29,8 @@ import (
 // base64Cmd represents the base64 command
 var base64Cmd = &cobra.Command{
 	Use:              "base64",
-	Short:            "Encodes or decodes a string to base64 representation",
-	Long:             "Encodes or decodes a string to base64 representation.",
+	Short:            "Encodes or decodes a string to it's base64 representation",
+	Long:             "Encodes or decodes a string to it's base64 representation.",
 	TraverseChildren: true,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 2 {
