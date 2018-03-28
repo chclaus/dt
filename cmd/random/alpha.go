@@ -21,9 +21,9 @@
 package random
 
 import (
-	"github.com/spf13/cobra"
-	"github.com/chclaus/dt/utils"
 	"fmt"
+	"github.com/chclaus/dt/utils"
+	"github.com/spf13/cobra"
 )
 
 // alphaCmd represents the alpha command

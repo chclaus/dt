@@ -27,10 +27,10 @@ import (
 	_ "github.com/chclaus/dt/cmd/hash"    // import for init functions
 	_ "github.com/chclaus/dt/cmd/html"    // import for init functions
 	_ "github.com/chclaus/dt/cmd/jwt"     // import for init functions
+	_ "github.com/chclaus/dt/cmd/random"  // import for init functions
 	_ "github.com/chclaus/dt/cmd/server"  // import for init functions
 	_ "github.com/chclaus/dt/cmd/uri"     // import for init functions
 	_ "github.com/chclaus/dt/cmd/version" // import for init functions
-	_ "github.com/chclaus/dt/cmd/random"  // import for init functions
 )
 
 func main() {

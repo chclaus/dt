@@ -21,12 +21,12 @@
 package random
 
 import (
+	"errors"
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
-	"errors"
 )
 
-var length int;
+var length int
 
 // randomCmd represents the random command
 var randomCmd = &cobra.Command{

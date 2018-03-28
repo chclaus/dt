@@ -21,15 +21,22 @@
 package utils
 
 import (
-	"math/big"
 	"crypto/rand"
-	"strings"
+	"math/big"
 	"strconv"
+	"strings"
 )
 
+// NUM are numbers [0:10)
 const NUM = "0123456789"
+
+// ALPH are alphabet letters in lower and upper case
 const ALPH = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+// SEPCIAL are special characters
 const SPECIAL = "!#$%&()*+,-./:;><?^_"
+
+// PARALLEL_LIMIT is the limit for concurrent execution of random char generations
 const PARALLEL_LIMIT = 100
 
 // Source defines a string of letters used as source for a random string
@@ -58,6 +65,7 @@ func (a AlphaNumeric) letters() string {
 	return ALPH + NUM
 }
 
+// Complex is the same as the AlphaNumeric source but adds also special characters
 type Complex struct{}
 
 func (c Complex) letters() string {
@@ -81,7 +89,7 @@ func Random(n int, a Source) string {
 
 			val, _ := rand.Int(rand.Reader, big.NewInt(int64(numLetters)))
 			iVal := val.Int64()
-			r <- letters[iVal:iVal+ 1]
+			r <- letters[iVal : iVal+1]
 		}(l, letters)
 	}
 
