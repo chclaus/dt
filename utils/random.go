@@ -29,7 +29,7 @@ import (
 
 const NUM = "0123456789"
 const ALPH = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const SPECIAL = ",;.:-_#+*ß?=)(/&%$§!^<>"
+const SPECIAL = "!#$%&()*+,-./:;><?^_"
 const PARALLEL_LIMIT = 100
 
 // Source defines a string of letters used as source for a random string
