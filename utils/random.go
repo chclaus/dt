@@ -33,7 +33,7 @@ const NUM = "0123456789"
 // ALPH are alphabet letters in lower and upper case
 const ALPH = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-// SEPCIAL are special characters
+// SPECIAL are special characters
 const SPECIAL = "!#$%&()*+,-./:;><?^_"
 
 // PARALLEL_LIMIT is the limit for concurrent execution of random char generations
