@@ -18,21 +18,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main
+package random
 
 import (
 	"github.com/chclaus/dt/cmd"
-	_ "github.com/chclaus/dt/cmd/base64"  // import for init functions
-	_ "github.com/chclaus/dt/cmd/date"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/hash"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/html"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/jwt"     // import for init functions
-	_ "github.com/chclaus/dt/cmd/server"  // import for init functions
-	_ "github.com/chclaus/dt/cmd/uri"     // import for init functions
-	_ "github.com/chclaus/dt/cmd/version" // import for init functions
-	_ "github.com/chclaus/dt/cmd/random"  // import for init functions
+	"github.com/spf13/cobra"
+	"errors"
 )
 
-func main() {
-	cmd.Execute()
+var length int;
+
+// randomCmd represents the random command
+var randomCmd = &cobra.Command{
+	Use:   "random",
+	Short: "Generates random numbers and strings",
+	Long:  "Generates random numbers and strings.",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 2 {
+			return errors.New("You have to specify if you want to generate a random string or number")
+		}
+
+		return nil
+	},
+}
+
+func init() {
+	cmd.RootCmd.AddCommand(randomCmd)
 }

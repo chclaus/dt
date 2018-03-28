@@ -18,21 +18,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main
+package random
 
 import (
-	"github.com/chclaus/dt/cmd"
-	_ "github.com/chclaus/dt/cmd/base64"  // import for init functions
-	_ "github.com/chclaus/dt/cmd/date"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/hash"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/html"    // import for init functions
-	_ "github.com/chclaus/dt/cmd/jwt"     // import for init functions
-	_ "github.com/chclaus/dt/cmd/server"  // import for init functions
-	_ "github.com/chclaus/dt/cmd/uri"     // import for init functions
-	_ "github.com/chclaus/dt/cmd/version" // import for init functions
-	_ "github.com/chclaus/dt/cmd/random"  // import for init functions
+	"github.com/spf13/cobra"
+	"github.com/chclaus/dt/utils"
+	"fmt"
 )
 
-func main() {
-	cmd.Execute()
+// alphaNumCmd represents the alphaNum command
+var alphaNumCmd = &cobra.Command{
+	Use:   "alphanum",
+	Short: "Generates a random string with alphanumeric letters",
+	Long:  "Generates a random string with alphanumeric letters.",
+	Run: func(cmd *cobra.Command, args []string) {
+		result := utils.Random(length, utils.AlphaNumeric{})
+		fmt.Println(result)
+	},
+}
+
+func init() {
+	randomCmd.AddCommand(alphaNumCmd)
+
+	alphaNumCmd.Flags().IntVarP(&length, "length", "l", 10, "defines the length (number of letters) of the generated string")
 }

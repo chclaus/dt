@@ -14,6 +14,7 @@ tools.
   * [Base64](#base64-command)
   * [Hash](#hash-command)
   * [JWT](#jwt-command)
+  # [Random](#random-command)
   * [Date](#date-command)
   * [HTML](#html-command)
   * [Server](#server)
@@ -32,6 +33,7 @@ tools.
           html        Escapes a html string and vice versa
           jwt         Allows decoding of a jwt
           server      Starts a simple web server to serve static content
+          random      Generates random numbers and strings
           uri         Encodes or decodes an URI
           version     Prints the current version of the dt
 
@@ -71,6 +73,13 @@ Decodes a jwt and pretty prints the resulting json.
 Further TODOs:
 - Signature validation
 - JWT creation
+
+## Random command
+Generates random strings and numbers. Currently supported functions are:
+- Generates a random string, based on an alphabet with a specific length.
+- Generates a random string with alphanumeric letters.
+- Generates a random string with a alphanumeric and special characters.
+- Generates random numbers with a specific length.
 
 ## Date command
 Date conversions:
@@ -123,7 +132,13 @@ To build the repository with docker, do the following:
         docker run --rm dt version
 
 # Contributing
-tbd.
+Everyone is welcome to create pull requests for this repository. If you're
+new to github, take a look [here](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/)
+to get an idea of it.
+
+If you've got an idea of a function that should find it's way to this
+project, but you won't implement it by yourself, please create a new
+issue.
 
 # License
 dt (dev-toolbelt) is released under the MIT license. See [LICENSE.txt](LICENSE.txt)
