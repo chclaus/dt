@@ -96,12 +96,6 @@ Escapes and unescapes HTML
 - reads a file and prints an escaped html sequence
 - unescapes an escaped html sequence to it's raw representation
 
-
-## Password command
-Generate passwords and password hashes
-
-TODO implement
-
 ## Server
 Starts a simple web server to serve static content. You can specify
 hostname and port and must set a folder to serve.
