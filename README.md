@@ -126,11 +126,11 @@ To build the repository with docker, do the following:
         docker run --rm dt version
 
 # Contributing
-Everyone is welcome to create pull requests for this repository. If you're
+Everyone is welcome to create pull requests for this project. If you're
 new to github, take a look [here](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/)
 to get an idea of it.
 
-If you've got an idea of a function that should find it's way to this
+If you've got an idea of a function that should find it's way into this
 project, but you won't implement it by yourself, please create a new
 issue.
 
