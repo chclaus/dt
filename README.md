@@ -14,7 +14,7 @@ tools.
   * [Base64](#base64-command)
   * [Hash](#hash-command)
   * [JWT](#jwt-command)
-  # [Random](#random-command)
+  * [Random](#random-command)
   * [Date](#date-command)
   * [HTML](#html-command)
   * [Server](#server)
