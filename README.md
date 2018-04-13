@@ -66,6 +66,7 @@ Returns the hash representation of an input in different hash formats:
 - sha3_256
 - sha3_512
 - sha512
+- bcrypt
 
 ## JWT command
 Decodes a jwt and pretty prints the resulting json.
