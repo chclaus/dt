@@ -9,8 +9,4 @@ class Dt < Formula
     bin.install "dt"
   end
 
-  def caveats; <<~EOS
-    CLI tool for common dev tasks.
-  EOS
-  end
 end

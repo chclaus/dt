@@ -38,7 +38,6 @@ brew:
     owner: chclaus
     name: dt
   folder: Formula
-  caveats: "CLI tool for common dev tasks."
   homepage: "https://github.com/chclaus/dt"
   description: "CLI tool for common dev tasks."
   install: |
