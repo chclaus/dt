@@ -9,6 +9,17 @@ builds:
     goarch:
       - amd64
       - 386
+
+# Changelog customization
+changelog:
+  filters:
+    # commit messages matching the regexp listed here will be removed from
+    # the changelog
+    # Default is empty
+    exclude:
+      - typo
+      - (?i)foo
+
 # Archive customization
 archive:
   wrap_in_directory: true
