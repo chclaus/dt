@@ -25,6 +25,7 @@ import (
 	_ "github.com/chclaus/dt/cmd/base64"  // import for init functions
 	_ "github.com/chclaus/dt/cmd/date"    // import for init functions
 	_ "github.com/chclaus/dt/cmd/hash"    // import for init functions
+	_ "github.com/chclaus/dt/cmd/uuid"    // import for init functions
 	_ "github.com/chclaus/dt/cmd/html"    // import for init functions
 	_ "github.com/chclaus/dt/cmd/jwt"     // import for init functions
 	_ "github.com/chclaus/dt/cmd/random"  // import for init functions

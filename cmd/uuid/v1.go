@@ -18,25 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package version
+package uuid
 
 import (
-	"fmt"
-	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
+	"github.com/satori/go.uuid"
+	"fmt"
 )
 
-// versionCmd represents the version command
-var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Prints the current version of the dt",
-	Long:  "All software has versions. This is dt's",
+// uuidV1Cmd represents the uuidV1 command
+var uuidV1Cmd = &cobra.Command{
+	Use:   "v1",
+	Short: "Generates a UUID Version 1",
+	Long: "Generates a v1 UUID, based on timestamp and MAC address (RFC 4122)",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("dt - the dev toolbelt v0.1.3 🤓")
+		v1 := uuid.NewV1()
+		fmt.Println(v1.String())
 	},
-	Example: ``,
+	Example: "dt uuid v1",
 }
 
 func init() {
-	cmd.RootCmd.AddCommand(versionCmd)
+	uuidCmd.AddCommand(uuidV1Cmd)
 }

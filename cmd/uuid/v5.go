@@ -18,25 +18,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package version
+package uuid
 
 import (
-	"fmt"
-	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
+	"github.com/satori/go.uuid"
+	"fmt"
+	"github.com/pkg/errors"
 )
 
-// versionCmd represents the version command
-var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Prints the current version of the dt",
-	Long:  "All software has versions. This is dt's",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("dt - the dev toolbelt v0.1.3 🤓")
+// uuidV5Cmd represents the uuidV5 command
+var uuidV5Cmd = &cobra.Command{
+	Use:   "v5",
+	Short: "Generates a UUID Version 5",
+	Long: "Generates a v5 UUID, based on SHA1 hashing of (namespace(UUID), value) (RFC 4122)",
+	PreRunE: func(cmd *cobra.Command, args []string) error {
+		ns := cmd.Flag("namespace").Value.String()
+		errMsg := "You have to specify a namespace and value. The namespace MUST be a valid UUID"
+		if ns == "" {
+			return errors.New(errMsg)
+		}
+		if _, err := uuid.FromString(ns); err != nil {
+			return errors.New(errMsg)
+		}
+
+		val := cmd.Flag("value").Value.String()
+		if val == "" {
+			return errors.New(errMsg)
+		}
+
+		return nil
 	},
-	Example: ``,
+	Run: func(cmd *cobra.Command, args []string) {
+		ns := cmd.Flag("namespace").Value.String()
+		nsUUID, _:= uuid.FromString(ns);
+		val := cmd.Flag("value").Value.String()
+
+		fmt.Println(uuid.NewV5(nsUUID, val).String())
+	},
+	Example: "dt uuid v5 -n cacae610-c76a-4736-90ef-0271126b4345 -v foo",
 }
 
 func init() {
-	cmd.RootCmd.AddCommand(versionCmd)
+	uuidCmd.AddCommand(uuidV5Cmd)
+
+	uuidV5Cmd.Flags().StringP("namespace", "n", "", "The namespace that should be hashed. It should be a domain or application specific UUID")
+	uuidV5Cmd.Flags().StringP("value", "v", "", "The value that should be hashed")
 }

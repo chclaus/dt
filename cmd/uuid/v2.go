@@ -18,25 +18,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package version
+package uuid
 
 import (
-	"fmt"
-	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
+	"github.com/satori/go.uuid"
+	"fmt"
 )
 
-// versionCmd represents the version command
-var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Prints the current version of the dt",
-	Long:  "All software has versions. This is dt's",
+// uuidV2Cmd represents the uuidV2 command
+var uuidV2Cmd = &cobra.Command{
+	Use:   "v2",
+	Short: "Generates a UUID Version 2",
+	Long: "Generates a v2 UUID, based on timestamp, MAC address and POSIX UID/GID (DCE 1.1)",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("dt - the dev toolbelt v0.1.3 🤓")
+		domain := cmd.Flag("domain").Value.String()
+		switch domain {
+		case "user":
+			v2 := uuid.NewV2(uuid.DomainPerson)
+			fmt.Println(v2.String())
+			break
+		case "group":
+			v2 := uuid.NewV2(uuid.DomainGroup)
+			fmt.Println(v2.String())
+			break
+		default:
+			cmd.Help()
+		}
 	},
-	Example: ``,
+	Example: "dt uuid v3 -n cacae610-c76a-4736-90ef-0271126b4345 -v foo",
 }
 
 func init() {
-	cmd.RootCmd.AddCommand(versionCmd)
+	uuidCmd.AddCommand(uuidV2Cmd)
+
+	uuidV2Cmd.Flags().StringP("domain", "d", "user", "the used domain for UID/GID. Valid values are: [user, group]")
 }
