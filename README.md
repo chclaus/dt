@@ -25,25 +25,7 @@ tools.
 - [License](#license)
 
 # Example
-    Usage:
-      dt [command]
-
-    Available Commands:
-      base64      Encodes or decodes a string to it's base64 representation
-      date        Basic date operations
-      hash        Hashes an arbitrary input with different hash algorithms
-      help        Help about any command
-      html        Escapes a html string and vice versa
-      jwt         Allows decoding of a jwt
-      server      Starts a simple web server to serve static content
-      random      Generates random numbers and strings
-      uri         Encodes or decodes an URI
-      version     Prints the current version of the dt
-
-    Flags:
-      -h, --help   help for dt
-
-    Use "dt [command] --help" for more information about a command.
+<img src="demo.gif?raw=" width="480px"></img>
 
 ## Installation
 If you've go installed and your `$GOPATH` is set, you can easily install
