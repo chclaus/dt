@@ -19,6 +19,8 @@ changelog:
     exclude:
       - typo
       - (?i)foo
+      - fmt
+      - gofmt
 
 # Archive customization
 archive:
