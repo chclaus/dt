@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	. "github.com/mattn/go-colorable"
 	"os"
+	. "github.com/mattn/go-colorable"
 )
 
 func main() {

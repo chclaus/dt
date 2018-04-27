@@ -134,7 +134,7 @@ func (f *Formatter) processMap(m map[string]interface{}, depth int) string {
 		return "{}"
 	}
 
-	for key := range m {
+	for key, _ := range m {
 		keys = append(keys, key)
 	}
 
