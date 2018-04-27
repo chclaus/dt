@@ -32,7 +32,7 @@ var versionCmd = &cobra.Command{
 	Short: "Prints the current version of the dt",
 	Long:  "All software has versions. This is dt's",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("dt - the dev toolbelt v0.1.3 🤓")
+		fmt.Println("dt - the dev toolbelt v0.2.0 🤓")
 	},
 	Example: ``,
 }
