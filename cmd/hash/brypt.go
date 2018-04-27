@@ -21,10 +21,10 @@
 package hash
 
 import (
-	"golang.org/x/crypto/bcrypt"
 	"errors"
 	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/chclaus/dt/utils"
 )
 
 var cost int
@@ -42,9 +42,7 @@ var bcryptCmd = &cobra.Command{
 		return nil
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		genHash, _ := bcrypt.GenerateFromPassword([]byte(args[0]), cost)
-
-		fmt.Println(string(genHash))
+		fmt.Println(utils.BcryptHash(args[0], cost))
 	},
 }
 

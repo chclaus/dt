@@ -23,6 +23,7 @@ package utils
 import (
 	"fmt"
 	"hash"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Hash returns a string representation of a given hash function
@@ -30,4 +31,10 @@ func Hash(hash hash.Hash, text string) string {
 	hash.Write([]byte(text))
 
 	return fmt.Sprintf("%x", hash.Sum(nil))
+}
+
+func BcryptHash(text string, costs int) string {
+	genHash, _ := bcrypt.GenerateFromPassword([]byte(text), costs)
+
+	return string(genHash)
 }
