@@ -21,16 +21,16 @@
 package uuid
 
 import (
-	"github.com/spf13/cobra"
-	"github.com/satori/go.uuid"
 	"fmt"
+	"github.com/satori/go.uuid"
+	"github.com/spf13/cobra"
 )
 
 // uuidV2Cmd represents the uuidV2 command
 var uuidV2Cmd = &cobra.Command{
 	Use:   "v2",
 	Short: "Generates a UUID Version 2",
-	Long: "Generates a v2 UUID, based on timestamp, MAC address and POSIX UID/GID (DCE 1.1)",
+	Long:  "Generates a v2 UUID, based on timestamp, MAC address and POSIX UID/GID (DCE 1.1)",
 	Run: func(cmd *cobra.Command, args []string) {
 		domain := cmd.Flag("domain").Value.String()
 		switch domain {

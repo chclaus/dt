@@ -22,9 +22,9 @@ package hash
 
 import (
 	"errors"
-	"github.com/spf13/cobra"
 	"fmt"
 	"github.com/chclaus/dt/utils"
+	"github.com/spf13/cobra"
 )
 
 var cost int

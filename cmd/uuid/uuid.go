@@ -21,16 +21,16 @@
 package uuid
 
 import (
+	"errors"
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
-	"errors"
 )
 
 // uuidCmd represents the uuid command
 var uuidCmd = &cobra.Command{
 	Use:   "uuid",
 	Short: "Generates a uuid",
-	Long: "Generates a uuid.",
+	Long:  "Generates a uuid.",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 2 {
 			return errors.New("You have to specify the version of your uuid.")
@@ -39,7 +39,6 @@ var uuidCmd = &cobra.Command{
 		return nil
 	},
 }
-
 
 func init() {
 	cmd.RootCmd.AddCommand(uuidCmd)

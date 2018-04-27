@@ -21,17 +21,17 @@
 package uuid
 
 import (
-	"github.com/spf13/cobra"
-	"github.com/satori/go.uuid"
 	"fmt"
 	"github.com/pkg/errors"
+	"github.com/satori/go.uuid"
+	"github.com/spf13/cobra"
 )
 
 // uuidV5Cmd represents the uuidV5 command
 var uuidV5Cmd = &cobra.Command{
 	Use:   "v5",
 	Short: "Generates a UUID Version 5",
-	Long: "Generates a v5 UUID, based on SHA1 hashing of (namespace(UUID), value) (RFC 4122)",
+	Long:  "Generates a v5 UUID, based on SHA1 hashing of (namespace(UUID), value) (RFC 4122)",
 	PreRunE: func(cmd *cobra.Command, args []string) error {
 		ns := cmd.Flag("namespace").Value.String()
 		errMsg := "You have to specify a namespace and value. The namespace MUST be a valid UUID"
@@ -51,7 +51,7 @@ var uuidV5Cmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		ns := cmd.Flag("namespace").Value.String()
-		nsUUID, _:= uuid.FromString(ns);
+		nsUUID, _ := uuid.FromString(ns)
 		val := cmd.Flag("value").Value.String()
 
 		fmt.Println(uuid.NewV5(nsUUID, val).String())
