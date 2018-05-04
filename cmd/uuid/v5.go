@@ -30,7 +30,7 @@ import (
 // uuidV5Cmd represents the uuidV5 command
 var uuidV5Cmd = &cobra.Command{
 	Use:   "v5",
-	Short: "Generates a UUID Version 5",
+	Short: "Generates a UUID Version 5 (namespace(UUID), value)",
 	Long:  "Generates a v5 UUID, based on SHA1 hashing of (namespace(UUID), value) (RFC 4122)",
 	PreRunE: func(cmd *cobra.Command, args []string) error {
 		ns := cmd.Flag("namespace").Value.String()

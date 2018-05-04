@@ -30,7 +30,7 @@ import (
 // uuidV3Cmd represents the uuidV3 command
 var uuidV3Cmd = &cobra.Command{
 	Use:   "v3",
-	Short: "Generates a UUID Version 3",
+	Short: "Generates a UUID Version 3 (namespace(UUID), value)",
 	Long:  "Generates a v3 UUID, based on MD5 hashing of (namespace(UUID), value) (RFC 4122)",
 	PreRunE: func(cmd *cobra.Command, args []string) error {
 		ns := cmd.Flag("namespace").Value.String()
@@ -56,7 +56,7 @@ var uuidV3Cmd = &cobra.Command{
 
 		fmt.Println(uuid.NewV3(nsUUID, val).String())
 	},
-	Example: "dt uuid v5 -n cacae610-c76a-4736-90ef-0271126b4345 -v foo",
+	Example: "dt uuid v3 -n cacae610-c76a-4736-90ef-0271126b4345 -v foo",
 }
 
 func init() {
