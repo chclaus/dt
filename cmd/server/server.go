@@ -26,6 +26,8 @@ import (
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
 	"net/http"
+	"path/filepath"
+	"os"
 )
 
 // serverCmd represents the server command
@@ -48,7 +50,13 @@ var serverCmd = &cobra.Command{
 		port := cmd.Flag("port").Value.String()
 		addr := fmt.Sprintf("%s:%s", hostname, port)
 
-		fmt.Printf("Serving %s on %s\n", args[0], addr)
+		path, err := filepath.Abs(args[0])
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		fmt.Printf("Serving %s on %s\n", path, addr)
 
 		http.ListenAndServe(addr, nil)
 	},
