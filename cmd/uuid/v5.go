@@ -22,9 +22,11 @@ package uuid
 
 import (
 	"fmt"
+	"github.com/chclaus/dt/config"
 	"github.com/pkg/errors"
 	"github.com/satori/go.uuid"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // uuidV5Cmd represents the uuidV5 command
@@ -33,17 +35,12 @@ var uuidV5Cmd = &cobra.Command{
 	Short: "Generates a UUID Version 5 (namespace(UUID), value)",
 	Long:  "Generates a v5 UUID, based on SHA1 hashing of (namespace(UUID), value) (RFC 4122)",
 	PreRunE: func(cmd *cobra.Command, args []string) error {
-		ns := cmd.Flag("namespace").Value.String()
-		errMsg := "You have to specify a namespace and value. The namespace MUST be a valid UUID"
+		ns := config.Cfg.UUID.Namespace
+		errMsg := "Error: You have to specify a namespace and value. The namespace MUST be a valid UUID"
 		if ns == "" {
 			return errors.New(errMsg)
 		}
 		if _, err := uuid.FromString(ns); err != nil {
-			return errors.New(errMsg)
-		}
-
-		val := cmd.Flag("value").Value.String()
-		if val == "" {
 			return errors.New(errMsg)
 		}
 
@@ -64,4 +61,7 @@ func init() {
 
 	uuidV5Cmd.Flags().StringP("namespace", "n", "", "The namespace that should be hashed. It should be a domain or application specific UUID")
 	uuidV5Cmd.Flags().StringP("value", "v", "", "The value that should be hashed")
+	uuidV5Cmd.MarkFlagRequired("value")
+
+	viper.BindPFlag("uuid.namespace", uuidV5Cmd.Flags().Lookup("namespace"))
 }

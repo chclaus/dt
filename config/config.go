@@ -1,9 +1,9 @@
 package config
 
 import (
-	"github.com/spf13/viper"
-	"github.com/mitchellh/go-homedir"
 	"fmt"
+	"github.com/mitchellh/go-homedir"
+	"github.com/spf13/viper"
 	"os"
 )
 

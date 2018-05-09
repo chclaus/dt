@@ -24,12 +24,12 @@ import (
 	"errors"
 	"fmt"
 	"github.com/chclaus/dt/cmd"
-	"github.com/spf13/cobra"
-	"net/http"
-	"path/filepath"
-	"os"
-	"github.com/spf13/viper"
 	"github.com/chclaus/dt/config"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"net/http"
+	"os"
+	"path/filepath"
 )
 
 // serverCmd represents the server command
