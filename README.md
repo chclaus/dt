@@ -21,6 +21,7 @@ tools.
   * [Date](#date-command)
   * [HTML](#html-command)
   * [Server](#server)
+- [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -122,6 +123,18 @@ Escapes and unescapes HTML
 ### Server
 Starts a simple web server to serve static content. You can specify
 hostname and port and must set a folder to serve.
+
+
+## Configuration
+You can configure a some default behaviors of dt to fit your needs.
+Just place a file `.dt.yaml` into your home directory, you can configure
+the following options:
+
+```yaml
+server:
+  address: 0.0.0.0
+  port: 3000
+```
 
 
 ## Contributing

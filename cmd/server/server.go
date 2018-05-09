@@ -28,6 +28,8 @@ import (
 	"net/http"
 	"path/filepath"
 	"os"
+	"github.com/spf13/viper"
+	"github.com/chclaus/dt/config"
 )
 
 // serverCmd represents the server command
@@ -46,9 +48,8 @@ var serverCmd = &cobra.Command{
 		fs := http.FileServer(http.Dir(args[0]))
 		http.Handle("/", fs)
 
-		hostname := cmd.Flag("address").Value.String()
-		port := cmd.Flag("port").Value.String()
-		addr := fmt.Sprintf("%s:%s", hostname, port)
+		srv := config.Cfg.Server
+		addr := fmt.Sprintf("%s:%s", srv.Address, srv.Port)
 
 		path, err := filepath.Abs(args[0])
 		if err != nil {
@@ -64,8 +65,12 @@ var serverCmd = &cobra.Command{
 }
 
 func init() {
+	cobra.OnInitialize(config.InitConfig)
+
 	cmd.RootCmd.AddCommand(serverCmd)
 
 	serverCmd.Flags().StringP("address", "a", "0.0.0.0", "the hostname or ip address")
 	serverCmd.Flags().StringP("port", "p", "3000", "the listening port")
+	viper.BindPFlag("server.port", serverCmd.Flags().Lookup("port"))
+	viper.BindPFlag("server.address", serverCmd.Flags().Lookup("address"))
 }
