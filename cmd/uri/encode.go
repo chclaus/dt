@@ -21,19 +21,30 @@
 package uri
 
 import (
-	"github.com/chclaus/dt/cmd"
+	"fmt"
+
+	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
+	"errors"
 )
 
-// uriCmd represents the uri command
-var uriCmd = &cobra.Command{
-	Use:   "uri",
-	Short: "Encodes or decodes an URI",
-	Long:  "Encodes or decodes an URI",
-	Example: `dt uri encode http://www.github.com
-dt uri decode http%3A%2F%2Fwww.github.com`,
+// encodeCmd represents the std encode command
+var encodeCmd = &cobra.Command{
+	Use:   "encode",
+	Short: "Encodes an URI-encoded string",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return errors.New("you have to specify a string which should be encoded")
+		}
+
+		return nil
+	},
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(utils.EncodeUri(args[0]))
+	},
+	Example: "dt uri encode http://www.github.com",
 }
 
 func init() {
-	cmd.RootCmd.AddCommand(uriCmd)
+	uriCmd.AddCommand(encodeCmd)
 }
