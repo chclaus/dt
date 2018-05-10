@@ -21,9 +21,11 @@
 package random
 
 import (
-	"errors"
 	"github.com/chclaus/dt/cmd"
 	"github.com/spf13/cobra"
+	"fmt"
+	"os"
+	"github.com/chclaus/dt/utils"
 )
 
 var length int
@@ -32,16 +34,37 @@ var length int
 var randomCmd = &cobra.Command{
 	Use:   "random",
 	Short: "Generates random numbers and strings",
-	Long:  "Generates random numbers and strings.",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 2 {
-			return errors.New("You have to specify if you want to generate a random string or number")
+	Long:  `Generates random numbers and strings. Possible variations are:
+  alpha       alphabet
+  alphanum    alphanumeric letters
+  complex     alphanumeric and special characters
+  number      random number`,
+	Run: func(cmd *cobra.Command, args []string) {
+		algo := cmd.Flag("algo").Value.String()
+		switch algo {
+		case "alpha":
+			fmt.Println(utils.Random(length, utils.Alphabet{}))
+			break
+		case "alphanum":
+			fmt.Println(utils.Random(length, utils.AlphaNumeric{}))
+			break
+		case "complex":
+			fmt.Println(utils.Random(length, utils.Complex{}))
+			break
+		case "number":
+			fmt.Println(utils.RandomNumber(length))
+			break
+		default:
+			fmt.Println(fmt.Errorf("the given algorithm '%s' is unknown.", algo))
+			os.Exit(1)
 		}
-
-		return nil
 	},
 }
 
 func init() {
 	cmd.RootCmd.AddCommand(randomCmd)
+
+	randomCmd.Flags().StringP("algo", "a", "complex",
+		`the used random algorithm. Possible values are: alpha, alphanum, complex, number`)
+	randomCmd.Flags().IntVarP(&length, "length", "l", 10, "defines the length of the generated result")
 }
