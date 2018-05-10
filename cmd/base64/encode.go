@@ -24,9 +24,9 @@ import (
 	"fmt"
 
 	"encoding/base64"
+	"errors"
 	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
-	"errors"
 	"os"
 )
 
@@ -34,7 +34,7 @@ import (
 var encodeCmd = &cobra.Command{
 	Use:   "encode",
 	Short: "Encodes a decoded base64 string",
-	Long:  `Encodes a decoded base64 string. As default, the standard encoding 'std',
+	Long: `Encodes a decoded base64 string. As default, the standard encoding 'std',
 defined in RFC 4648 is used. All possible encodings are:
 
   std         Uses the standard base64 encoding, as defined in RFC 4648

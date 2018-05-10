@@ -21,13 +21,13 @@
 package random
 
 import (
-	"github.com/chclaus/dt/cmd"
-	"github.com/spf13/cobra"
 	"fmt"
-	"os"
-	"github.com/chclaus/dt/utils"
-	"github.com/spf13/viper"
+	"github.com/chclaus/dt/cmd"
 	"github.com/chclaus/dt/config"
+	"github.com/chclaus/dt/utils"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"os"
 )
 
 var length int
@@ -36,7 +36,7 @@ var length int
 var randomCmd = &cobra.Command{
 	Use:   "random",
 	Short: "Generates random numbers and strings",
-	Long:  `Generates random numbers and strings. Possible variations are:
+	Long: `Generates random numbers and strings. Possible variations are:
   alpha       alphabet
   alphanum    alphanumeric letters
   complex     alphanumeric and special characters

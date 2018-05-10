@@ -21,19 +21,19 @@
 package hash
 
 import (
-	"errors"
-	"github.com/chclaus/dt/cmd"
-	"github.com/spf13/cobra"
-	"fmt"
-	"github.com/chclaus/dt/utils"
-	"os"
 	"crypto/md5"
 	"crypto/sha1"
-	"golang.org/x/crypto/sha3"
 	"crypto/sha256"
 	"crypto/sha512"
-	"github.com/spf13/viper"
+	"errors"
+	"fmt"
+	"github.com/chclaus/dt/cmd"
 	"github.com/chclaus/dt/config"
+	"github.com/chclaus/dt/utils"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"golang.org/x/crypto/sha3"
+	"os"
 )
 
 var cost int

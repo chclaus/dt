@@ -21,14 +21,14 @@
 package uuid
 
 import (
+	"errors"
+	"fmt"
 	"github.com/chclaus/dt/cmd"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"github.com/chclaus/dt/config"
 	"github.com/satori/go.uuid"
-	"fmt"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"os"
-	"errors"
 )
 
 var version int
@@ -39,7 +39,7 @@ var uuidCmd = &cobra.Command{
 	Short: "Generates a UUID",
 	Long:  "Generates a UUID.",
 	Args: func(cmd *cobra.Command, args []string) error {
-		if (config.Cfg.UUID.Version == 3 || config.Cfg.UUID.Version == 5) {
+		if config.Cfg.UUID.Version == 3 || config.Cfg.UUID.Version == 5 {
 			if len(args) != 1 {
 				return errors.New("version 3 and 5 UUIDs needing a namespace and value")
 			}

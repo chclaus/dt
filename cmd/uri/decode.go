@@ -23,9 +23,9 @@ package uri
 import (
 	"fmt"
 
+	"errors"
 	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
-	"errors"
 	"os"
 )
 
