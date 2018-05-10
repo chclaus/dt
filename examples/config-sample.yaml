@@ -1,0 +1,51 @@
+---
+#
+# Configuration of the server command: dt server
+#
+server:
+  # Defines the listening port of the server.
+  port: 3001
+
+  # Defines the hostname or IP address of the server.
+  address: 127.0.0.1
+
+
+#
+# Configuration of the uuid command: dt uuid
+#
+uuid:
+  # A namespace which represents an application or domain in UUID format.
+  # This value is just evaluated during the generation of UUID v3 or UUID v5.
+  namespace: cacae610-c76a-4736-90ef-0271126b4346
+
+  # The default UUID version.
+  version: 4
+
+
+#
+# Configuration of the base64 command: dt base64
+#
+base64:
+  encoding: std
+
+
+#
+# Configuration of the random command: dt random
+#
+random:
+  # Possible algorithms are: alpha, alphanum, complex, number.
+  algorithm: complex
+
+  # Defines the length of the generated result (must be a positive number).
+  length: 20
+
+
+#
+# Configuration of the hash command: dt hash
+#
+hash:
+  # Possible algorithms are: bcrypt, md5, sha1, sha256, sha3_256, sha3_512, sha512.
+  algorithm: bcrypt
+
+  # The cost configuration will only be considered, if the hash algorithm is bcrypt.
+  cost: 12

@@ -111,9 +111,6 @@ Date conversions:
 - time nanos to RFC 3339
 - RFC 3339 to time millis
 
-### Regex command
-TODO
-
 ### HTML command
 Escapes and unescapes HTML
 - transforms a string to an escaped html sequence
@@ -124,7 +121,6 @@ Escapes and unescapes HTML
 Starts a simple web server to serve static content. You can specify
 hostname and port and must set a folder to serve.
 
-
 ## Configuration
 You can configure a some default behaviors of dt to fit your needs.
 Just place a file `.dt.yaml` into your home directory, you can configure
@@ -132,10 +128,22 @@ the following options:
 
 ```yaml
 server:
-  address: 0.0.0.0
-  port: 3000
+  port: 3001
+  address: 127.0.0.1
+uuid:
+  namespace: cacae610-c76a-4736-90ef-0271126b4346
+  version: 4
+base64:
+  encoding: std
+random:
+  algorithm: complex
+  length: 20
+hash:
+  algorithm: bcrypt
+  cost: 12
 ```
 
+For more informations, please take a look in the examples directory.
 
 ## Contributing
 Everyone is welcome to create pull requests for this project. If you're
@@ -145,6 +153,8 @@ to get an idea of it.
 If you've got an idea of a function that should find it's way into this
 project, but you won't implement it by yourself, please create a new
 issue.
+
+Please ensure, that all contributions match the MIT license.
 
 ## License
 dt (dev-toolbelt) is released under the MIT license. See [LICENSE.txt](LICENSE.txt)
