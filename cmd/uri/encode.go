@@ -18,27 +18,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package random
+package uri
 
 import (
 	"fmt"
+
+	"errors"
 	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
 )
 
-// numberCmd represents the number command
-var numberCmd = &cobra.Command{
-	Use:   "number",
-	Short: "Generates random numbers with a specific length",
-	Long:  "Generates random numbers with a specific length.",
-	Run: func(cmd *cobra.Command, args []string) {
-		result := utils.RandomNumber(length)
-		fmt.Println(result)
+// encodeCmd represents the std encode command
+var encodeCmd = &cobra.Command{
+	Use:   "encode",
+	Short: "Encodes an URI-encoded string",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return errors.New("you have to specify a string which should be encoded")
+		}
+
+		return nil
 	},
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(utils.EncodeUri(args[0]))
+	},
+	Example: "dt uri encode http://www.github.com",
 }
 
 func init() {
-	randomCmd.AddCommand(numberCmd)
-
-	numberCmd.Flags().IntVarP(&length, "length", "l", 10, "defines the length (number of digits) of the generated number")
+	uriCmd.AddCommand(encodeCmd)
 }

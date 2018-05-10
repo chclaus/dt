@@ -12,6 +12,7 @@ type Config struct {
 	Base64 Base64Config
 	Random RandomConfig
 	UUID   UUIDConfig
+	Hash   HashConfig
 }
 
 type ServerConfig struct {
@@ -24,13 +25,18 @@ type Base64Config struct {
 }
 
 type RandomConfig struct {
-	Generator string
-	Length    uint32
-	Cost      uint8
+	Algorithm string
+	Length    int
 }
 
 type UUIDConfig struct {
 	Namespace string
+	Version   int
+}
+
+type HashConfig struct {
+	Algorithm string
+	Cost      int
 }
 
 var Cfg *Config

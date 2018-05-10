@@ -18,34 +18,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package hash
+package uri
 
 import (
 	"fmt"
 
-	"crypto/md5"
 	"errors"
 	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
+	"os"
 )
 
-// md5Cmd represents the md5 command
-var md5Cmd = &cobra.Command{
-	Use:   "md5",
-	Short: "Returns the md5 hash representation of the input",
-	Long:  "Returns the md5 hash representation of the input.",
+// decodeCmd represents the uri decode command
+var decodeCmd = &cobra.Command{
+	Use:   "decode",
+	Short: "Decodes an URI-encoded string",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
-			return errors.New("You have to specify the text that should be hashed.")
+			return errors.New("you have to specify a string which should be decoded")
 		}
 
 		return nil
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(utils.Hash(md5.New(), args[0]))
+		result, err := utils.DecodeUri(args[0])
+
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		fmt.Println(result)
+		return
 	},
+	Example: "dt uri decode http%3A%2F%2Fwww.github.com",
 }
 
 func init() {
-	hashCmd.AddCommand(md5Cmd)
+	uriCmd.AddCommand(decodeCmd)
 }

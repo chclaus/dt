@@ -43,4 +43,7 @@ var base64Cmd = &cobra.Command{
 
 func init() {
 	cmd.RootCmd.AddCommand(base64Cmd)
+
+	base64Cmd.PersistentFlags().StringP("format", "f", "std",
+		"the encoding format. Possible values are: std, stdRaw, url, urlRaw")
 }

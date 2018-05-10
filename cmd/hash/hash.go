@@ -21,25 +21,87 @@
 package hash
 
 import (
+	"crypto/md5"
+	"crypto/sha1"
+	"crypto/sha256"
+	"crypto/sha512"
 	"errors"
+	"fmt"
 	"github.com/chclaus/dt/cmd"
+	"github.com/chclaus/dt/config"
+	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"golang.org/x/crypto/sha3"
+	"os"
 )
+
+var cost int
 
 // hashCmd represents the hash command
 var hashCmd = &cobra.Command{
 	Use:   "hash",
 	Short: "Hashes an arbitrary input with different hash algorithms",
+	Long: `Hashes an arbitrary input with different hash algorithms. These are:
+  - bcrypt
+  - md5 (default)
+  - sha1
+  - sha256
+  - sha3_256
+  - sha3_512
+  - sha512`,
 	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 2 {
-			return errors.New("You have to specify the algorithm and the text which should be hashed.")
+		if len(args) != 1 {
+			return errors.New("You have to specify the text which should be hashed.")
 		}
 
 		return nil
 	},
-	Long: "Hashes an arbitrary input with different hash algorithms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		h := config.Cfg.Hash
+		switch h.Algorithm {
+		case "bcrypt":
+			fmt.Println(utils.BcryptHash(args[0], h.Cost))
+			break
+		case "md5":
+			fmt.Println(utils.Hash(md5.New(), args[0]))
+			break
+		case "sha1":
+			fmt.Println(utils.Hash(sha1.New(), args[0]))
+			break
+		case "sha3_256":
+			fmt.Println(utils.Hash(sha3.New256(), args[0]))
+			break
+		case "sha3_512":
+			fmt.Println(utils.Hash(sha3.New512(), args[0]))
+			break
+		case "sha256":
+			fmt.Println(utils.Hash(sha256.New(), args[0]))
+			break
+		case "sha512":
+			fmt.Println(utils.Hash(sha512.New(), args[0]))
+			break
+		default:
+			fmt.Println(fmt.Errorf("the given algorithm '%s' is unknown.", h.Algorithm))
+			os.Exit(1)
+		}
+	},
+	Example: `dt hash -a bcrypt foo
+dt hash -a bcrypt -c 15 foo
+dt hash -a md5 foo
+dt hash -a sha1 foo
+dt hash -a sha3_256 foo
+dt hash -a sha3_512 foo
+dt hash -a sha256 foo
+dt hash -a sha512 foo`,
 }
 
 func init() {
 	cmd.RootCmd.AddCommand(hashCmd)
+
+	hashCmd.Flags().StringP("algo", "a", "md5",
+		`the used hash algorithm. Possible values are: bcrypt, md5, sha1, sha256, sha3_256, sha3_512, sha512`)
+	hashCmd.Flags().IntVarP(&cost, "cost", "c", 10, "defines the costs of the bcrypt algorithm")
+	viper.BindPFlag("hash.algorithm", hashCmd.Flags().Lookup("algo"))
+	viper.BindPFlag("hash.cost", hashCmd.Flags().Lookup("cost"))
 }
