@@ -45,5 +45,5 @@ func init() {
 	cmd.RootCmd.AddCommand(base64Cmd)
 
 	base64Cmd.PersistentFlags().StringP("format", "f", "std",
-		`the encoding format. See dt base64 encode --help for detailed information.`)
+		"the encoding format. Possible values are: std, stdRaw, url, urlRaw")
 }
