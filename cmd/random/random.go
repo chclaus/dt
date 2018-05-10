@@ -26,6 +26,8 @@ import (
 	"fmt"
 	"os"
 	"github.com/chclaus/dt/utils"
+	"github.com/spf13/viper"
+	"github.com/chclaus/dt/config"
 )
 
 var length int
@@ -40,22 +42,22 @@ var randomCmd = &cobra.Command{
   complex     alphanumeric and special characters
   number      random number`,
 	Run: func(cmd *cobra.Command, args []string) {
-		algo := cmd.Flag("algo").Value.String()
-		switch algo {
+		r := config.Cfg.Random
+		switch r.Algorithm {
 		case "alpha":
-			fmt.Println(utils.Random(length, utils.Alphabet{}))
+			fmt.Println(utils.Random(r.Length, utils.Alphabet{}))
 			break
 		case "alphanum":
-			fmt.Println(utils.Random(length, utils.AlphaNumeric{}))
+			fmt.Println(utils.Random(r.Length, utils.AlphaNumeric{}))
 			break
 		case "complex":
-			fmt.Println(utils.Random(length, utils.Complex{}))
+			fmt.Println(utils.Random(r.Length, utils.Complex{}))
 			break
 		case "number":
-			fmt.Println(utils.RandomNumber(length))
+			fmt.Println(utils.RandomNumber(r.Length))
 			break
 		default:
-			fmt.Println(fmt.Errorf("the given algorithm '%s' is unknown.", algo))
+			fmt.Println(fmt.Errorf("the given algorithm '%s' is unknown.", r.Algorithm))
 			os.Exit(1)
 		}
 	},
@@ -66,5 +68,7 @@ func init() {
 
 	randomCmd.Flags().StringP("algo", "a", "complex",
 		`the used random algorithm. Possible values are: alpha, alphanum, complex, number`)
-	randomCmd.Flags().IntVarP(&length, "length", "l", 10, "defines the length of the generated result")
+	randomCmd.Flags().IntVarP(&length, "length", "l", 20, "defines the length of the generated result")
+	viper.BindPFlag("random.algorithm", randomCmd.Flags().Lookup("algo"))
+	viper.BindPFlag("random.length", randomCmd.Flags().Lookup("length"))
 }

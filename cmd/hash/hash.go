@@ -32,6 +32,8 @@ import (
 	"golang.org/x/crypto/sha3"
 	"crypto/sha256"
 	"crypto/sha512"
+	"github.com/spf13/viper"
+	"github.com/chclaus/dt/config"
 )
 
 var cost int
@@ -56,10 +58,10 @@ var hashCmd = &cobra.Command{
 		return nil
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		algo := cmd.Flag("algo").Value.String()
-		switch algo {
+		h := config.Cfg.Hash
+		switch h.Algorithm {
 		case "bcrypt":
-			fmt.Println(utils.BcryptHash(args[0], cost))
+			fmt.Println(utils.BcryptHash(args[0], h.Cost))
 			break
 		case "md5":
 			fmt.Println(utils.Hash(md5.New(), args[0]))
@@ -80,7 +82,7 @@ var hashCmd = &cobra.Command{
 			fmt.Println(utils.Hash(sha512.New(), args[0]))
 			break
 		default:
-			fmt.Println(fmt.Errorf("the given algorithm '%s' is unknown.", algo))
+			fmt.Println(fmt.Errorf("the given algorithm '%s' is unknown.", h.Algorithm))
 			os.Exit(1)
 		}
 	},
@@ -100,4 +102,6 @@ func init() {
 	hashCmd.Flags().StringP("algo", "a", "md5",
 		`the used hash algorithm. Possible values are: bcrypt, md5, sha1, sha256, sha3_256, sha3_512, sha512`)
 	hashCmd.Flags().IntVarP(&cost, "cost", "c", 10, "defines the costs of the bcrypt algorithm")
+	viper.BindPFlag("hash.algorithm", hashCmd.Flags().Lookup("algo"))
+	viper.BindPFlag("hash.cost", hashCmd.Flags().Lookup("cost"))
 }
