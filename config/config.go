@@ -31,6 +31,7 @@ type RandomConfig struct {
 
 type UUIDConfig struct {
 	Namespace string
+	Version   int
 }
 
 var Cfg *Config
