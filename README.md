@@ -26,7 +26,7 @@ tools.
 - [License](#license)
 
 # Example
-<img src="demo_v0_2_0.gif?raw=" width="726px"></img>
+<img src="demo_v1_0_0.gif?raw=" width="672px"></img>
 
 ## Installation
 If you've go installed and your `$GOPATH` is set, you can easily install
