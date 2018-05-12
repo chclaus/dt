@@ -39,7 +39,12 @@ dt with:
     brew tap chclaus/dt git@github.com:chclaus/dt.git
     brew install dt
 
-### Build
+### Install via Docker
+
+    docker pull chclaus/dt:latest
+    docker run --rm chclaus/dt:latest version
+
+## Build
 To build the project you can clone the repository with...
 
     git clone git@github.com:chclaus/dt
