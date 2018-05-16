@@ -13,4 +13,5 @@ When filling in a section please remove the help text and the above text.
 - [ ] Added or updated unit tests
 - [ ] Added API documentation and updated Readme (required for all new commands)
 - [ ] Added new command
-- [ ] Update dependency or does other cleanups
+- [ ] Updated existing command
+- [ ] Updated dependency or does other cleanups
