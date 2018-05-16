@@ -25,6 +25,7 @@ import (
 	"fmt"
 	"github.com/chclaus/dt/cmd"
 	"github.com/chclaus/dt/config"
+	"github.com/chclaus/dt/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"net/http"
@@ -57,8 +58,11 @@ var serverCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		fmt.Printf("Serving %s on %s\n", path, addr)
+		if srv.OpenBrowser {
+			utils.Open("http://" + addr)
+		}
 
+		fmt.Printf("Serving %s on %s\n", path, addr)
 		http.ListenAndServe(addr, nil)
 	},
 	Example: ``,
@@ -71,6 +75,8 @@ func init() {
 
 	serverCmd.Flags().StringP("address", "a", "0.0.0.0", "the hostname or ip address")
 	serverCmd.Flags().StringP("port", "p", "3000", "the listening port")
+	serverCmd.Flags().BoolP("open", "o", false, "open a browser window")
 	viper.BindPFlag("server.port", serverCmd.Flags().Lookup("port"))
 	viper.BindPFlag("server.address", serverCmd.Flags().Lookup("address"))
+	viper.BindPFlag("server.openBrowser", serverCmd.Flags().Lookup("open"))
 }

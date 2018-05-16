@@ -40,7 +40,7 @@ var encodeCmd = &cobra.Command{
 		return nil
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(utils.EncodeUri(args[0]))
+		fmt.Println(utils.EncodeURI(args[0]))
 	},
 	Example: "dt uri encode http://www.github.com",
 }

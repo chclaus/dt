@@ -9,6 +9,9 @@ server:
   # Defines the hostname or IP address of the server.
   address: 127.0.0.1
 
+  # Defines if a browser window should opens that points automatically to the served url
+  openBrowser: true
+
 
 #
 # Configuration of the uuid command: dt uuid

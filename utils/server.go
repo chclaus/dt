@@ -18,42 +18,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package uri
+package utils
 
 import (
-	"fmt"
-
 	"errors"
-	"github.com/chclaus/dt/utils"
-	"github.com/spf13/cobra"
-	"os"
+	"log"
+	"os/exec"
+	"runtime"
 )
 
-// decodeCmd represents the uri decode command
-var decodeCmd = &cobra.Command{
-	Use:   "decode",
-	Short: "Decodes an URI-encoded string",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			return errors.New("you have to specify a string which should be decoded")
-		}
 
-		return nil
-	},
-	Run: func(cmd *cobra.Command, args []string) {
-		result, err := utils.DecodeURI(args[0])
+// Open opens the default system browser and points to the given url.
+func Open(url string) {
+	var cmd *exec.Cmd
 
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+	switch runtime.GOOS {
+	case "linux":
+		cmd = exec.Command("xdg-open", url)
+	case "windows":
+		cmd = exec.Command("rundll32", "url.dll,FileProtocolHandler", url)
+	case "darwin":
+		cmd = exec.Command("open", url)
+	default:
+		log.Fatal(errors.New("Unsupported operating system"))
+	}
 
-		fmt.Println(result)
-		return
-	},
-	Example: "dt uri decode http%3A%2F%2Fwww.github.com",
-}
-
-func init() {
-	uriCmd.AddCommand(decodeCmd)
+	err := cmd.Start()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
