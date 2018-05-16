@@ -36,8 +36,8 @@ const ALPH = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 // SPECIAL are special characters
 const SPECIAL = "!#$%&()*+,-./:;><?^_"
 
-// PARALLEL_LIMIT is the limit for concurrent execution of random char generations
-const PARALLEL_LIMIT = 100
+// parallelLimit is the limit for concurrent execution of random char generations
+const parallelLimit = 100
 
 // Source defines a string of letters used as source for a random string
 type Source interface {
@@ -79,11 +79,11 @@ func Random(n int, a Source) string {
 	l := len(letters)
 	r := make(chan string)
 	result := make([]string, n)
-	sem := make(Semaphore, PARALLEL_LIMIT)
+	sem := make(Semaphore, parallelLimit)
 
 	for i := 0; i < n; i++ {
 		go func(numLetters int, letters string) {
-			// Wait if there are more concurrent executions than the PARALLEL_LIMIT allows
+			// Wait if there are more concurrent executions than the parallelLimit allows
 			sem.Acquire(1)
 			defer sem.Release(1)
 

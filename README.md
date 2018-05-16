@@ -126,6 +126,9 @@ Escapes and unescapes HTML
 Starts a simple web server to serve static content. You can specify
 hostname and port and must set a folder to serve.
 
+You can also pass an option `-o` to open your default system browser
+that points automatically to the served url.
+
 ## Configuration
 You can configure a some default behaviors of dt to fit your needs.
 Just place a file `.dt.yaml` into your home directory, you can configure
@@ -135,6 +138,7 @@ the following options:
 server:
   port: 3001
   address: 127.0.0.1
+  openBrowser: true
 uuid:
   namespace: cacae610-c76a-4736-90ef-0271126b4346
   version: 4

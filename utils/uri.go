@@ -25,8 +25,8 @@ import (
 	"strings"
 )
 
-// EncodeUri encodes a string so it can safely placed inside an URL.
-func EncodeUri(uri string) string {
+// EncodeURI encodes a string so it can safely placed inside an URL.
+func EncodeURI(uri string) string {
 	uriComponents := strings.Split(uri, " ")
 
 	for i, s := range uriComponents {
@@ -36,8 +36,8 @@ func EncodeUri(uri string) string {
 	return strings.Join(uriComponents, "%20")
 }
 
-// DecodeUri does the inverse transformation of EncodeUri. Currently it's
+// DecodeURI does the inverse transformation of EncodeUri. Currently it's
 // just a delegate for uri.QueryUnescape.
-func DecodeUri(decodedUri string) (string, error) {
-	return url.QueryUnescape(decodedUri)
+func DecodeURI(decodedURI string) (string, error) {
+	return url.QueryUnescape(decodedURI)
 }
