@@ -27,7 +27,6 @@ import (
 	"runtime"
 )
 
-
 // Open opens the default system browser and points to the given url.
 func Open(url string) {
 	var cmd *exec.Cmd
