@@ -31,6 +31,10 @@ import (
 	"github.com/spf13/cobra"
 	"log"
 	"strings"
+	"github.com/spf13/viper"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/fatih/color"
+	"github.com/chclaus/dt/config"
 )
 
 // jwtCmd represents the jwt command
@@ -51,12 +55,31 @@ var jwtCmd = &cobra.Command{
 			log.Fatal("Invalid JWT. It must has a JOSE Header, JWS Payload and JWS Signature")
 		}
 
-		fmt.Println("JOSE Header:")
-		fmt.Println(prettifyPart(parts[0]))
-		fmt.Printf("\nJWS Payload:\n")
-		fmt.Println(prettifyPart(parts[1]))
+		printJWT(parts)
+
+		if config.Cfg.JWT.Secret != "" {
+			_, err := jwt.Parse(args[0], func(token *jwt.Token) (interface{}, error) {
+				return []byte(config.Cfg.JWT.Secret), nil
+			})
+			if err != nil {
+				red := color.New(color.FgRed)
+				red.Printf("\nOh no! %s.\n", err)
+			} else {
+				green := color.New(color.FgGreen)
+				green.Printf("\ntoken signature is valid.\n")
+			}
+		}
 	},
-	Example: "dt jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmb28iLCJzdWIiOiJiYXIifQ.p2BXWExAD8A1F-OTRlZi9Uiy8IDl2rk6nzZsI-EGBgk",
+	// secret: foobar
+	Example: `dt jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmb28iLCJzdWIiOiJiYXIifQ.UxyRHFY_BpuDQ1Qp9MVvbn5uAlaoWCUKUIeq1qQIcCw
+dt jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmb28iLCJzdWIiOiJiYXIifQ.UxyRHFY_BpuDQ1Qp9MVvbn5uAlaoWCUKUIeq1qQIcCw -s foobar`,
+}
+
+func printJWT(parts []string) {
+	fmt.Println("JOSE Header:")
+	fmt.Println(prettifyPart(parts[0]))
+	fmt.Printf("\nJWS Payload:\n")
+	fmt.Println(prettifyPart(parts[1]))
 }
 
 // prettifyPart decodes the base64 string and generates a pretty, colorful representation of the resulting json
@@ -71,4 +94,7 @@ func prettifyPart(part string) string {
 
 func init() {
 	cmd.RootCmd.AddCommand(jwtCmd)
+
+	jwtCmd.Flags().StringP("secret", "s", "", "the secret to validate the token signature")
+	viper.BindPFlag("jwt.secret", jwtCmd.Flags().Lookup("secret"))
 }

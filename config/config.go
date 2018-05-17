@@ -14,6 +14,7 @@ type Config struct {
 	Random RandomConfig
 	UUID   UUIDConfig
 	Hash   HashConfig
+	JWT    JWTConfig
 }
 
 // ServerConfig allows configuration settings of the server cmd
@@ -44,6 +45,11 @@ type UUIDConfig struct {
 type HashConfig struct {
 	Algorithm string
 	Cost      int
+}
+
+// JWTConfig allows configuration settings of the jwt cmd
+type JWTConfig struct {
+	Secret string
 }
 
 // Cfg the root object of the configuration
