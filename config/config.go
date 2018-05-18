@@ -49,7 +49,9 @@ type HashConfig struct {
 
 // JWTConfig allows configuration settings of the jwt cmd
 type JWTConfig struct {
-	Secret string
+	Secret       string
+	SecretFile   string
+	Base64Secret bool
 }
 
 // Cfg the root object of the configuration
