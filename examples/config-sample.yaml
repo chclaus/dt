@@ -52,3 +52,17 @@ hash:
 
   # The cost configuration will only be considered, if the hash algorithm is bcrypt.
   cost: 12
+
+
+#
+# Configuration of the jwt command: dt jwt
+#
+jwt:
+  # The secret used to verify the jwt signature
+  secret: foobar
+
+  # A absolute path to your secret file
+  secretFile: /path/to/your/secret/file
+
+  # Set this to true if your secret is base64 encoded using the std encoding (RFC 4648)
+  base64Secret: false

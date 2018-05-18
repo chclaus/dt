@@ -150,6 +150,10 @@ random:
 hash:
   algorithm: bcrypt
   cost: 12
+jwt:
+  secret: foobar
+  secretFile: /path/to/your/secret/file
+  base64Secret: false
 ```
 
 For more informations, please take a look in the examples directory.
