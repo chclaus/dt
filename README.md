@@ -97,11 +97,9 @@ Returns a new random UUID. You can specify the generated UUID version:
 - Version 5, based on SHA1 hashing of (namespace(UUID), value) (RFC 4122)
 
 ### JWT command
-Decodes a jwt and pretty prints the resulting json.
-
-Further TODOs:
-- Signature validation
-- JWT creation
+Decodes a jwt and pretty prints the resulting json. You can also pass
+a secret (base64 or plain) within a file or as program argument to verify
+the jwt signature.
 
 ### Random command
 Generates random strings and numbers. Currently supported functions are:
