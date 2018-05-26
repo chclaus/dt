@@ -31,13 +31,22 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"log"
 )
+
+func withCacheDisabled(next http.Handler) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Cache-control", "no-cache, no-store, must-revalidate")
+		next.ServeHTTP(w, r)
+	}
+}
 
 // serverCmd represents the server command
 var serverCmd = &cobra.Command{
-	Use:   "server",
-	Short: "Starts a simple web server to serve static content",
-	Long:  "Starts a simple web server to serve static content",
+	Aliases: []string{"serve"},
+	Use:     "server",
+	Short:   "Starts a simple web server to serve static content",
+	Long:    "Starts a simple web server to serve static content",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			return errors.New("You have to specify a folder with web content")
@@ -47,8 +56,7 @@ var serverCmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		fs := http.FileServer(http.Dir(args[0]))
-		http.Handle("/", fs)
-
+		http.Handle("/", withCacheDisabled(fs));
 		srv := config.Cfg.Server
 		addr := fmt.Sprintf("%s:%s", srv.Address, srv.Port)
 
@@ -63,7 +71,7 @@ var serverCmd = &cobra.Command{
 		}
 
 		fmt.Printf("Serving %s on %s\n", path, addr)
-		http.ListenAndServe(addr, nil)
+		log.Fatal(http.ListenAndServe(addr, nil))
 	},
 	Example: ``,
 }
