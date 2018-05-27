@@ -25,6 +25,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/chclaus/dt/config"
 )
 
 // RootCmd represents the base command when called without any subcommands
@@ -44,4 +45,10 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+}
+
+func init() {
+	RootCmd.PersistentFlags().StringVar(&config.CfgFile, "config", "", "config file (default is $HOME/.dt.yaml)")
+
+	cobra.OnInitialize(config.InitConfig)
 }

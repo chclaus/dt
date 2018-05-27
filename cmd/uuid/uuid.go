@@ -96,7 +96,6 @@ var uuidCmd = &cobra.Command{
 
 func init() {
 	cmd.RootCmd.AddCommand(uuidCmd)
-	cobra.OnInitialize(config.InitConfig)
 
 	uuidCmd.Flags().StringP("namespace", "n", "", "the namespace that should be hashed in UUID v3 or UUID v5. It should be a domain or application specific UUID")
 	uuidCmd.Flags().IntVarP(&version, "version", "v", 4, "defines the version of the generated uuid")

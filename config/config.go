@@ -5,6 +5,8 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 // Config is the root collection of command configurations
@@ -55,6 +57,7 @@ type JWTConfig struct {
 }
 
 // Cfg the root object of the configuration
+var CfgFile string
 var Cfg *Config
 
 // InitConfig initializes the configuration if provided.
@@ -65,8 +68,17 @@ func InitConfig() {
 		os.Exit(1)
 	}
 
-	viper.SetConfigName(".dt")
-	viper.AddConfigPath(home)
+	if CfgFile == "" {
+		viper.SetConfigName(".dt")
+		viper.AddConfigPath(home)
+
+	} else {
+		base := filepath.Base(strings.TrimSuffix(CfgFile, filepath.Ext(CfgFile)))
+		viper.SetConfigName(base)
+		dir := filepath.Dir(CfgFile)
+		viper.AddConfigPath(strings.Replace(dir, "~", home, 1))
+	}
+
 	viper.ReadInConfig()
 	viper.Unmarshal(&Cfg)
 }

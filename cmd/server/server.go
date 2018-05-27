@@ -77,8 +77,6 @@ var serverCmd = &cobra.Command{
 }
 
 func init() {
-	cobra.OnInitialize(config.InitConfig)
-
 	cmd.RootCmd.AddCommand(serverCmd)
 
 	serverCmd.Flags().StringP("address", "a", "0.0.0.0", "the hostname or ip address")
