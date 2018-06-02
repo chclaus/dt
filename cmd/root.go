@@ -32,10 +32,7 @@ import (
 var RootCmd = &cobra.Command{
 	Use:   "dt",
 	Short: "A toolbelt for developers",
-	Long: `The dev toolbelt is a fast and flexible tool to handle common use 
-cases like encodings, string, jwt, ... operations. 
-
-Use cases you generally use some online tools - BAH!`,
+	Long: `The dev toolbelt is a fast and flexible tool to handle common use cases like encodings, string, jwt etc.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
