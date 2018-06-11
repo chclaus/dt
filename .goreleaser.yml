@@ -33,6 +33,8 @@ archive:
     - LICENSE.txt
     - README.md
     - examples/config-sample.yaml
+    - dt-completion.zsh
+    - dt-completion.bash
 
 # Homebrew customization
 brew:
