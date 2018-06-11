@@ -37,10 +37,6 @@ var completionCmd = &cobra.Command{
 
   bash:
   =====
-  Load the dt completion code for bash into the current shell:
-
-    source <(dt completion --shell bash)
-
   Write bash completion code to a file and source if from .bash_profile
 
     dt completion --shell bash > ~/.dt_completion.sh
@@ -49,10 +45,6 @@ var completionCmd = &cobra.Command{
 
   zsh:
   =====
-  Load the dt completion code for zsh into the current shell
-  
-    source <(dt completion --shell zsh)
-
   Set the dt completion code for zsh to autoload on startup
   
     dt completion --shell zsh > "${fpath[1]}/_dt"`,
