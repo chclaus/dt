@@ -45,3 +45,5 @@ brew:
   description: "CLI tool for common dev tasks."
   install: |
     bin.install "dt"
+    zsh_completion.install "dt-completion.zsh" => "_dt.zsh"
+    bash_completion.install "dt-completion.bash"
