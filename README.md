@@ -11,6 +11,10 @@ tools.
 
 - [Example](#example)
 - [Installation](#installation)
+  * [Install via go](#installation)
+  * [Install via Homebrew](#installation-homebrew)
+  * [Install via Docker](#installation-docker)
+  * [Shell Completions](#completions)
 - [Commands](#commands)
   * [URI](#uri-command)
   * [Base64](#base64-command)
@@ -21,6 +25,7 @@ tools.
   * [Date](#date-command)
   * [HTML](#html-command)
   * [Server](#server)
+  * [completion](#completions)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
@@ -43,6 +48,25 @@ dt with:
 
     docker pull chclaus/dt:latest
     docker run --rm chclaus/dt:latest version
+
+### Shell completions
+If you installed the tool via homebrew and use either bash or zsh as shell, 
+you don't need to worry about anything else.
+
+If you used the native installation, you can easily create an autocompletion:
+
+#### Bash
+Write bash completion code to a file and source if from `.bash_profile`:
+
+    dt completion --shell bash > ~/.dt_completion.sh
+    printf "\n# dt bash completion\nsource '$HOME/.dt_completion.sh'" >> $HOME/.bash_profile
+    source $HOME/.bash_profile
+
+#### Zsh
+Set the dt completion code for zsh to autoload on startup:
+
+    dt completion --shell zsh > "${fpath[1]}/_dt"
+
 
 ## Build
 To build the project you can clone the repository with...
