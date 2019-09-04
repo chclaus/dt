@@ -3,7 +3,7 @@
 
 # dt - the dev toolbelt
 
-The dev toolbelt is a fast and flexible tool to handle common use
+The dev toolbelt is a fast and flexible cli tool to handle common use
 cases of your daily work. Use cases you generally use some online
 tools.
 
